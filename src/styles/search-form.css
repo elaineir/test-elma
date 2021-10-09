@@ -1,0 +1,18 @@
+.search-form {
+  box-sizing: border-box;
+  display: flex;
+  padding: 7px;
+  border: 1px solid var(--colorUIBorders);
+  border-radius: 28px;
+}
+
+.search-form__input {
+  box-sizing: border-box;
+  flex-grow: 1;
+  font-size: 18px;
+  color: var(--colorTextPrimary);
+  line-height: 1.2;
+  padding: 0 5px;
+  background-color: transparent;
+  border: none;
+}

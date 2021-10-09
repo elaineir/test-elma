@@ -23,6 +23,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(svg|ico)$/,
+        type: 'asset/resource',
+      },
+      {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,

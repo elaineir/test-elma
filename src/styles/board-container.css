@@ -1,0 +1,15 @@
+.board-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+}
+
+.board-container__board {
+  align-self: stretch;
+  flex-grow: 1;
+}
+
+.board-container__button {
+  flex-shrink: 0;
+}

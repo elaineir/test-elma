@@ -1,0 +1,36 @@
+.body {
+  --colorBackground: #F9F9F9;
+  --colorTextPrimary: #000;
+  --colorTextSecondary: #726d6d;
+  --colorUIPrimary: #fff;
+  --colorUISecondary: #3456F3;
+  --colorUIBorders: #E8E8E8;
+  --colorCardBoard: #2BE080;
+  --colorCardBacklog: #E8E8E8;
+  --colorDanger: #FF004D;
+  --transitionBase: .3s ease;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
+  font-weight: 400;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  background-color: var(--colorBackground);
+}
+
+.body_theme_dark {
+  --colorBackground: #202020;
+  --colorTextPrimary: #fff;
+  --colorTextSecondary: #8B8B8B;
+  --colorUIPrimary: #202020;
+  --colorUISecondary: #FF6838;
+  --colorUIBorders: #424242;
+  --colorCardBoard: #2BE080;
+  --colorCardBacklog: #2F2F2F;
+  --colorDanger: #FF004D;
+}

@@ -1,0 +1,7 @@
+.board {
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: var(--colorUIPrimary);
+  border-radius: 10px;
+}
+

@@ -1,0 +1,29 @@
+.card-backlog {
+  box-sizing: border-box;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: var(--colorCardBacklog);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: var(--transitionBase);
+}
+
+.card-backlog:hover {
+  cursor: pointer;
+  transform: translateY(-4px);
+}
+
+.card-backlog__title {
+  margin: 0 0 10px;
+  color: var(--colorTextPrimary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.card-backlog__description {
+  margin: 0;
+  color: var(--colorTextPrimary);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+}
