@@ -4,9 +4,10 @@
   --colorTextSecondary: #726d6d;
   --colorUIPrimary: #fff;
   --colorUISecondary: #3456F3;
+  --colorUICalendar: #E8E8E8;
   --colorUIBorders: #E8E8E8;
-  --colorCardBoard: #2BE080;
-  --colorCardBacklog: #E8E8E8;
+  --colorUICardBoard: #2BE080;
+  --colorUICardBacklog: #E8E8E8;
   --colorDanger: #FF004D;
   --transitionBase: .3s ease;
 
@@ -29,8 +30,9 @@
   --colorTextSecondary: #8B8B8B;
   --colorUIPrimary: #202020;
   --colorUISecondary: #FF6838;
+  --colorUICalendar: #E8E8E8;
   --colorUIBorders: #424242;
-  --colorCardBoard: #2BE080;
-  --colorCardBacklog: #2F2F2F;
+  --colorUICardBoard: #2BE080;
+  --colorUICardBacklog: #2F2F2F;
   --colorDanger: #FF004D;
 }

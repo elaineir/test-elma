@@ -1,5 +1,5 @@
 import { backlogCardSelectors, dateSettings } from '../config/constants';
-import { getTemplate } from './render-card';
+import { getTemplate } from '../scripts/render-card';
 
 const {
   templateSelector,

@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 10px;
   border-radius: 5px;
-  background-color: var(--colorCardBacklog);
+  background-color: var(--colorUICardBacklog);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: var(--transitionBase);
 }

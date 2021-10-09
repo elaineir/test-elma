@@ -13,7 +13,11 @@
   <body class="body">
     <div class="page">
       <h1 class="main-title page__main-title">Планировщик</h1>
-      <button class="button button_theme page__theme-btn" type="button" aria-label="Сменить цветовую схему">
+      <button
+        class="button button_theme page__theme-btn"
+        type="button"
+        aria-label="Сменить цветовую схему"
+      >
         <svg
           class="button__svg-theme"
           xmlns="http://www.w3.org/2000/svg"
@@ -34,7 +38,14 @@
           aria-label="Предыдущая неделя"
         ></button>
 
-        <div class="board board-container__board">Календарь</div>
+        <div class="board board-container__board">
+          <div class="board__users">
+            <!-- сюда будут рендериться карточки users -->
+          </div>
+          <div class="board__calendar">
+            <!-- сюда будет рендериться календарь с тасками -->
+          </div>
+        </div>
 
         <button
           class="button button_next board-container__button"
@@ -57,6 +68,25 @@
   </body>
 
   <!-- templates -->
+  <template class="template-card-user">
+    <div class="card-user">
+      <p class="card-user__name">Имя Фамилия</p>
+    </div>
+  </template>
+
+  <template class="template-calendar-column">
+    <div class="calendar-column">
+      <div class="calendar-column__date">Дата</div>
+      <!-- сюда будут рендериться ячейки -->
+    </div>
+  </template>
+
+  <template class="template-calendar-cell">
+    <div class="calendar-cell">
+      <h3 class="calendar-cell__title">Заголовок</h3>
+    </div>
+  </template>
+
   <template class="template-card-backlog">
     <li class="card-backlog" draggable="true">
       <h3 class="card-backlog__title">Заголовок</h3>

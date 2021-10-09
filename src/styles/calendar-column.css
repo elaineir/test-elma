@@ -1,0 +1,18 @@
+.calendar-column {
+  max-width: 155px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  row-gap: 5px;
+}
+
+.calendar-column__date {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  color: var(--colorTextPrimary);
+  padding: 10px;
+  background-color: var(--colorUICalendar);
+  border-radius: 5px;
+}

@@ -1,0 +1,17 @@
+.card-user {
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--colorUICalendar);
+  border-radius: 10px;
+}
+
+.card-user__name {
+  margin: 0 auto;
+  color: var(--colorTextPrimary);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+  text-align: center;
+}

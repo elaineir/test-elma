@@ -15,6 +15,26 @@ export const backlogCardSelectors = {
   parentSelector: '.backlog__tasks-container',
 };
 
+export const usersCardSelectors = {
+  templateSelector: '.template-card-user',
+  elementSelector: '.card-user',
+  userNameSelector: '.card-user__name',
+  parentSelector: '.board__users',
+};
+
+export const calendarColumnSelectors = {
+  templateSelector: '.template-calendar-column',
+  elementSelector: '.calendar-column',
+  dateCellSelector: '.calendar-column__date',
+  parentSelector: '.board__calendar',
+};
+
+export const calendarCellSelectors = {
+  templateSelector: '.template-calendar-cell',
+  elementSelector: '.calendar-cell',
+  titleSelector: '.calendar-cell__title',
+};
+
 export const dateSettings = {
   locale: 'ru-RU',
   options: {
@@ -23,4 +43,10 @@ export const dateSettings = {
     month: 'short',
     day: 'numeric',
   },
+  numeric: {
+    day: 'numeric',
+    month: 'numeric',
+  },
 };
+
+export const fullDayInMilliseconds = 3600 * 24 * 1000;

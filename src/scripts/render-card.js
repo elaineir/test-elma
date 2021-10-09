@@ -4,4 +4,4 @@ export const getTemplate = ({ templateSelector, elementSelector }) => {
   return template.querySelector(elementSelector).cloneNode(true);
 };
 
-export const render = ({ element, parentElement }) => parentElement.prepend(element);
+export const render = ({ element, parentElement }) => parentElement.append(element);
