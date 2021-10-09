@@ -21,9 +21,25 @@
 }
 
 .card-backlog__description {
-  margin: 0;
+  margin: 0 0 10px;
   color: var(--colorTextPrimary);
   font-size: 14px;
   font-weight: 400;
   line-height: 1.2;
+}
+
+.card-backlog__date {
+  margin: 0 0 5px;
+  color: var(--colorTextSecondary);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.card-backlog__date:last-of-type {
+  margin-bottom: 0;
+}
+
+.card-backlog__date-span {
+  color: var(--colorTextPrimary);
 }
