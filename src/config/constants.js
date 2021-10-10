@@ -59,6 +59,11 @@ export const popupSelectors = {
   popupOpenClass: 'popup_open',
 };
 
+export const searchFormSelectors = {
+  searchForm: '.search-form',
+  searchInput: '.search-form__input',
+};
+
 export const dateSettings = {
   locale: 'ru-RU',
   options: {
@@ -74,3 +79,4 @@ export const dateSettings = {
 };
 
 export const fullDayInMilliseconds = 3600 * 24 * 1000;
+export const timerDelay = 3000;

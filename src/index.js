@@ -6,6 +6,8 @@ import {
   calendarColumnSelectors,
   fullDayInMilliseconds,
   popupSelectors,
+  searchFormSelectors,
+  timerDelay,
   toggleThemeSettings,
   usersCardSelectors,
   weekButtonsSelectors,
@@ -39,12 +41,17 @@ const renderColumns = () => {
   }
 };
 
+const createBacklogCard = (task) => {
+  const backlogCard = new BacklogCard(task, backlogCardSelectors);
+  const newBacklogCard = backlogCard.createCard();
+  backlogCard.setEventListeners();
+  return newBacklogCard;
+};
+
 const renderBacklogTasks = () => {
   ProjectState.backlogTasks.forEach((task) => {
-    const backlogCard = new BacklogCard(task, backlogCardSelectors);
-    const newBacklogCard = backlogCard.createCard();
-    backlogCard.setEventListeners();
-    backlogList.addItem(newBacklogCard);
+    const backlogCard = createBacklogCard(task);
+    backlogList.addItem(backlogCard);
   });
 };
 
@@ -80,6 +87,34 @@ const getInitialData = async () => {
 };
 
 getInitialData();
+
+// поиск
+const searchForm = document.querySelector(searchFormSelectors.searchForm);
+const searchInput = searchForm.querySelector(searchFormSelectors.searchInput);
+
+const handleSearch = (evt) => {
+  evt.preventDefault();
+  const keyword = searchInput.value;
+  const result = ProjectState.backlogTasks.filter((task) =>
+    task.subject.toLowerCase().includes(keyword.toLowerCase())
+  );
+  backlogList.clearItems();
+
+  if (result.length) {
+    result.forEach((task) => {
+      const backlogCard = createBacklogCard(task);
+      backlogList.addItem(backlogCard);
+    });
+  } else {
+    backlogList.addTextContent('Ничего не нашлось');
+    setTimeout(() => {
+      backlogList.clearItems();
+      renderBacklogTasks();
+    }, timerDelay);
+  }
+};
+
+searchForm.addEventListener('submit', handleSearch);
 
 // перелистывание календаря
 const showNextWeek = () => {

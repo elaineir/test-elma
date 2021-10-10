@@ -11,6 +11,10 @@ class RendererSection {
   clearItems() {
     this._container.textContent = '';
   }
+
+  addTextContent(content) {
+    this._container.textContent = content;
+  }
 }
 
 export default RendererSection;

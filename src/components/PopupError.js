@@ -1,3 +1,5 @@
+import { timerDelay } from '../config/constants';
+
 class PopupError {
   constructor(selectors) {
     this._selectors = selectors;
@@ -12,7 +14,7 @@ class PopupError {
   _close() {
     setTimeout(() => {
       this._popup.classList.remove(this._selectors.popupOpenClass);
-    }, 3000);
+    }, timerDelay);
   }
 }
 
