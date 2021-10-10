@@ -8,7 +8,25 @@ class ProjectState {
     this._backlogTasks = [];
     this._usersIds = {};
     this._calendarLength = 7;
-    this._startDay = undefined;
+    this._currentDate = new Date();
+    this._currentDateNumeric = refineToNumericYYMMDD(new Date());
+    this._startDay = this._updateAndSetDates();
+  }
+
+  _removeTaskFromBacklog(taskId) {
+    this._backlogTasks = this._backlogTasks.filter((task) => task.id !== taskId);
+  }
+
+  _callSubscribers() {
+    this._subscribers.forEach((listener) => listener());
+  }
+
+  _updateAndSetDates() {
+    const startDate = new Date(this._currentDate.setHours(0, 0, 0, 0));
+
+    return startDate.setDate(
+      startDate.getDate() - startDate.getDay() + (startDate.getDay() === 0 ? -6 : 1)
+    );
   }
 
   get assignedTasks() {
@@ -39,6 +57,10 @@ class ProjectState {
     this._startDay = value;
   }
 
+  get currentDateNumeric() {
+    return this._currentDateNumeric;
+  }
+
   addTaskToAssignedTasks(task) {
     this._assignedTasks.push(task);
   }
@@ -49,6 +71,10 @@ class ProjectState {
 
     // запрос из календаря
     if (type === ASSIGN_BY_DATE) {
+      if (this._currentDate > Date.parse(startDate)) {
+        return;
+      }
+
       if (taskToBeAssigned.planEndDate === taskToBeAssigned.planStartDate) {
         taskToBeAssigned.planEndDate = startDate;
       } else {
@@ -68,26 +94,13 @@ class ProjectState {
     this._backlogTasks.push(task);
   }
 
-  _removeTaskFromBacklog(taskId) {
-    this._backlogTasks = this._backlogTasks.filter((task) => task.id !== taskId);
-  }
-
   mapUsersIds(users) {
     const ids = users.reduce((obj, { id }, i) => ({ ...obj, [i]: id }), {});
     this._usersIds = { ...ids };
   }
 
-  defineStartDay() {
-    const currentDate = new Date();
-    this._startDay = currentDate.setDate(currentDate.getDate() + 1 - currentDate.getDay());
-  }
-
   addSubscriber(listenerFn) {
     this._subscribers.push(listenerFn);
-  }
-
-  _callSubscribers() {
-    this._subscribers.forEach((listener) => listener());
   }
 }
 

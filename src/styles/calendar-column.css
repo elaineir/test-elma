@@ -16,3 +16,8 @@
   background-color: var(--colorUICalendar);
   border-radius: 5px;
 }
+
+.calendar-column_current-day .calendar-column__date {
+  color: var(--colorTextTertiary);
+  background-color: var(--colorUISecondary);
+}

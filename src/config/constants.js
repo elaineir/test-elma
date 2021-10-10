@@ -28,6 +28,7 @@ export const calendarColumnSelectors = {
   templateSelector: '.template-calendar-column',
   elementSelector: '.calendar-column',
   dateCellSelector: '.calendar-column__date',
+  currentDayClass: 'calendar-column_current-day',
 };
 
 export const calendarCellSelectors = {

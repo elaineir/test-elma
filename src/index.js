@@ -21,8 +21,6 @@ import {
 import ProjectState from './state/ProjectState';
 import { refineToNumericYYMMDD } from './utils/handle-dates';
 
-ProjectState.defineStartDay();
-
 // контейнеры-рендереры
 const backlogList = new RendererSection(backlogCardSelectors.parentSelector);
 const usersList = new RendererSection(usersCardSelectors.parentSelector);
