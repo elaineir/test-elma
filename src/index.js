@@ -11,14 +11,11 @@ import {
 } from './config/constants';
 import { TASKS_ROUTE, USERS_ROUTE } from './config/config';
 import { BacklogCard, CalendarColumn, ColumnCell, RendererSection, UserCard } from './components';
+import BoardState from './state/BoardState';
 
-const assignedTasks = [];
-let usersMap = {};
-const calendarLength = 7;
-
-// опреление первой даты календаря
-const currentDate = new Date();
-let monday = currentDate.setDate(currentDate.getDate() + 1 - currentDate.getDay());
+// инициализация стейта проекта
+const ProjectState = BoardState.getInstance();
+ProjectState.defineStartDay();
 
 // контейнеры-рендереры
 const backlogList = new RendererSection(backlogCardSelectors.parentSelector);
@@ -27,26 +24,26 @@ const usersList = new RendererSection(usersCardSelectors.parentSelector);
 
 const createCell = ({ date, tasksSchema, index }) => {
   const columnCell = new ColumnCell(
-    { executor: usersMap[index], date, tasks: tasksSchema[index] ?? [] },
+    { executor: ProjectState.usersIds[index], date, tasks: tasksSchema[index] ?? [] },
     calendarCellSelectors
   );
   return columnCell.createCell();
 };
 
 const renderColumns = () => {
-  const rowCount = Object.keys(usersMap).length;
-  for (let i = 0; i < calendarLength; i += 1) {
-    const columnDate = monday + fullDayInMilliseconds * i;
+  const rowCount = Object.keys(ProjectState.usersIds).length;
+  for (let i = 0; i < ProjectState.calendarLength; i += 1) {
+    const columnDate = ProjectState.startDay + fullDayInMilliseconds * i;
     const formattedDate = new Date(columnDate).toLocaleDateString('en-CA');
 
     const calendarColumn = new CalendarColumn({ date: formattedDate }, calendarColumnSelectors);
     calendarContainer.addItem(calendarColumn.createCalendarColumn());
 
     // схема тасков для колонки по ключам исполнителей
-    const tasksSchema = calendarColumn.getDayTasksSchema(assignedTasks);
+    const tasksSchema = calendarColumn.getDayTasksSchema(ProjectState.assignedTasks);
 
     for (let y = 0; y < rowCount; y += 1) {
-      const userId = usersMap[y];
+      const userId = ProjectState.usersIds[y];
       const cell = createCell({ date: formattedDate, tasksSchema, index: userId });
       calendarColumn.addItem(cell);
     }
@@ -56,13 +53,13 @@ const renderColumns = () => {
 // перелистывание календаря
 const showNextWeek = () => {
   calendarContainer.clearItems();
-  monday += fullDayInMilliseconds * 7;
+  ProjectState.startDay += fullDayInMilliseconds * 7;
   renderColumns();
 };
 
 const showPrevWeek = () => {
   calendarContainer.clearItems();
-  monday -= fullDayInMilliseconds * 7;
+  ProjectState.startDay -= fullDayInMilliseconds * 7;
   renderColumns();
 };
 
@@ -78,8 +75,9 @@ const getInitialData = () => {
     .then(([users, tasks]) => {
       // отрисовка tasks в backlog
       tasks.forEach((task) => {
-        if (task.executor) assignedTasks.push(task);
-        else {
+        if (task.executor) {
+          ProjectState.assignTask(task);
+        } else {
           const backlogCard = new BacklogCard(task, backlogCardSelectors);
           backlogList.addItem(backlogCard.createCard());
         }
@@ -89,9 +87,7 @@ const getInitialData = () => {
         const userCard = new UserCard(user, usersCardSelectors);
         usersList.addItem(userCard.createCard());
       });
-
-      const userIds = users.reduce((obj, { id }, i) => ({ ...obj, [i]: id }), {});
-      usersMap = { ...userIds };
+      ProjectState.mapUsersIds(users);
       renderColumns();
     })
     .catch((err) => console.log(err));
