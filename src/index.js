@@ -11,10 +11,8 @@ import {
 } from './config/constants';
 import { TASKS_ROUTE, USERS_ROUTE } from './config/config';
 import { BacklogCard, CalendarCell, CalendarColumn, RendererSection, UserCard } from './components';
-import BoardState from './state/BoardState';
+import ProjectState from './state/ProjectState';
 
-// инициализация стейта проекта
-const ProjectState = BoardState.getInstance();
 ProjectState.defineStartDay();
 
 // контейнеры-рендереры
@@ -52,6 +50,48 @@ const renderColumns = () => {
   }
 };
 
+const renderBacklogTasks = () => {
+  ProjectState.backlogTasks.forEach((task) => {
+    const backlogCard = new BacklogCard(task, backlogCardSelectors);
+    const newBacklogCard = backlogCard.createCard();
+    backlogCard.setEventListeners();
+    backlogList.addItem(newBacklogCard);
+  });
+};
+
+const renderUsers = (users) =>
+  users.forEach((user) => {
+    const userCard = new UserCard(user, usersCardSelectors);
+    const newUserCard = userCard.createCard();
+    userCard.setEventListeners();
+    usersList.addItem(newUserCard);
+  });
+
+// первая отрисовка и обработка данных с сервера
+const getInitialData = () => {
+  Promise.all([getData(USERS_ROUTE), getData(TASKS_ROUTE)])
+    .then(([users, tasks]) => {
+      // сортировка заданий и добавление их в стейт
+      tasks.forEach((task) => {
+        if (task.executor) ProjectState.addTaskToAssignedTasks(task);
+        else ProjectState.addTaskToBacklog(task);
+      });
+
+      // отрисовка исполнителей
+      renderUsers(users);
+      ProjectState.mapUsersIds(users);
+
+      // отрисовка бэклога
+      renderBacklogTasks();
+
+      // отрисока колонок календаря
+      renderColumns();
+    })
+    .catch((err) => console.log(err));
+};
+
+getInitialData();
+
 // перелистывание календаря
 const showNextWeek = () => {
   calendarContainer.clearItems();
@@ -71,31 +111,11 @@ const prevWeekButton = document.querySelector('.button_prev');
 nextWeekButton.addEventListener('click', showNextWeek);
 prevWeekButton.addEventListener('click', showPrevWeek);
 
-// первая отрисовка и обработка данных с сервера
-const getInitialData = () => {
-  Promise.all([getData(USERS_ROUTE), getData(TASKS_ROUTE)])
-    .then(([users, tasks]) => {
-      // отрисовка tasks в backlog
-      tasks.forEach((task) => {
-        if (task.executor) {
-          ProjectState.assignTask(task);
-        } else {
-          const backlogCard = new BacklogCard(task, backlogCardSelectors);
-          backlogList.addItem(backlogCard.createCard());
-        }
-      });
-      console.log(ProjectState.assignedTasks);
-
-      // отрисовка users в таблицу
-      users.forEach((user) => {
-        const userCard = new UserCard(user, usersCardSelectors);
-        usersList.addItem(userCard.createCard());
-      });
-      ProjectState.mapUsersIds(users);
-      renderColumns();
-    })
-    .catch((err) => console.log(err));
-};
-
-getInitialData();
+// инициализация переключателя темы
 initToggleColorTheme(toggleThemeSettings);
+
+// добавление наблюдателей в стейт для ререндера
+ProjectState.addSubscriber(calendarContainer.clearItems);
+ProjectState.addSubscriber(backlogList.clearItems);
+ProjectState.addSubscriber(renderColumns);
+ProjectState.addSubscriber(renderBacklogTasks);

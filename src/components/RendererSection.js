@@ -1,6 +1,7 @@
 class RendererSection {
   constructor(containerSelector) {
     this._container = document.querySelector(containerSelector);
+    this.clearItems = this.clearItems.bind(this);
   }
 
   addItem(item) {

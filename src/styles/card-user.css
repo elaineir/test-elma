@@ -5,6 +5,11 @@
   align-items: center;
   background-color: var(--colorUICalendar);
   border-radius: 10px;
+  transition: background-color var(--transitionBase);
+}
+
+.card-user_drag-over {
+  background-color: var(--colorUISecondary);
 }
 
 .card-user__name {
@@ -14,4 +19,9 @@
   font-weight: 500;
   line-height: 1.2;
   text-align: center;
+  transition: color var(--transitionBase);
+}
+
+.card-user_drag-over .card-user__name {
+  color: var(--colorTextTertiary);
 }

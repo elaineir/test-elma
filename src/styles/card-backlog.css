@@ -12,6 +12,10 @@
   transform: translateY(-4px);
 }
 
+.card-backlog_draggable {
+  opacity: 0;
+}
+
 .card-backlog__title {
   margin: 0 0 10px;
   color: var(--colorTextPrimary);
