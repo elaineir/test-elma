@@ -1,5 +1,5 @@
-import RendererSection from './RendererSection';
 import ProjectState from '../state/ProjectState';
+import RendererSection from './RendererSection';
 import { ASSIGN_BY_DATE } from '../state/types';
 import { calendarCellSelectors, calendarTaskSelectors } from '../config/constants';
 

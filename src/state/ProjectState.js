@@ -6,6 +6,7 @@ class ProjectState {
     this._subscribers = [];
     this._assignedTasks = [];
     this._backlogTasks = [];
+    this._users = [];
     this._usersIds = {};
     this._calendarLength = 7;
     this._currentDate = new Date();
@@ -41,6 +42,14 @@ class ProjectState {
     return this._usersIds;
   }
 
+  set users(value) {
+    this._users = value;
+  }
+
+  get users() {
+    return this._users;
+  }
+
   set calendarLength(value) {
     this._calendarLength = value;
   }
@@ -72,6 +81,7 @@ class ProjectState {
     // запрос из календаря
     if (type === ASSIGN_BY_DATE) {
       if (this._currentDate > Date.parse(startDate)) {
+        // попытка назначить задание на "вчера"
         return;
       }
 

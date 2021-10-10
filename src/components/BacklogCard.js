@@ -24,15 +24,6 @@ class BacklogCard extends Component {
     this._handleDragEnd = this._handleDragEnd.bind(this);
   }
 
-  createCard() {
-    this._cardTitle.textContent = this._cardData.subject;
-    this._cardDescription.textContent = this._cardData.description;
-    this._cardStartDate.textContent = refineToString(this._cardData.planStartDate);
-    this._cardEndDate.textContent = refineToString(this._cardData.planEndDate);
-    this._backlogCard.setAttribute('id', this._cardData.id);
-    return this._backlogCard;
-  }
-
   _handleDragStart(evt) {
     this._backlogCard.classList.add('card-backlog_draggable');
     evt.dataTransfer.setData('text/plain', this._cardData.id);
@@ -41,6 +32,15 @@ class BacklogCard extends Component {
 
   _handleDragEnd() {
     this._backlogCard.classList.remove('card-backlog_draggable');
+  }
+
+  createCard() {
+    this._cardTitle.textContent = this._cardData.subject;
+    this._cardDescription.textContent = this._cardData.description;
+    this._cardStartDate.textContent = refineToString(this._cardData.planStartDate);
+    this._cardEndDate.textContent = refineToString(this._cardData.planEndDate);
+    this._backlogCard.setAttribute('id', this._cardData.id);
+    return this._backlogCard;
   }
 
   setEventListeners() {

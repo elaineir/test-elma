@@ -1,5 +1,5 @@
-import Component from './Component';
 import ProjectState from '../state/ProjectState';
+import Component from './Component';
 import { ASSIGN_BY_USER } from '../state/types';
 
 class UserCard extends Component {
@@ -12,11 +12,6 @@ class UserCard extends Component {
     this._handleDragOver = this._handleDragOver.bind(this);
     this._handleDragLeave = this._handleDragLeave.bind(this);
     this._handleDrop = this._handleDrop.bind(this);
-  }
-
-  createCard() {
-    this._fullNameElement.textContent = `${this._cardData.firstName} ${this._cardData.surname}`;
-    return this._userCard;
   }
 
   _handleDragOver(evt) {
@@ -34,6 +29,11 @@ class UserCard extends Component {
     const taskId = evt.dataTransfer.getData('text/plain');
     ProjectState.assignTask({ type: ASSIGN_BY_USER, taskId, executorId: this._cardData.id });
     this._handleDragLeave();
+  }
+
+  createCard() {
+    this._fullNameElement.textContent = `${this._cardData.firstName} ${this._cardData.surname}`;
+    return this._userCard;
   }
 
   setEventListeners() {

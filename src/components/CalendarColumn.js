@@ -1,6 +1,8 @@
-import Component from './Component';
-import { refineToNumericDDMM } from '../utils/handle-dates';
 import ProjectState from '../state/ProjectState';
+import Component from './Component';
+import CalendarCell from './CalendarCell';
+import { refineToNumericDDMM } from '../utils/handle-dates';
+import { calendarCellSelectors } from '../config/constants';
 
 class CalendarColumn extends Component {
   constructor(column, { templateSelector, elementSelector, dateCellSelector, currentDayClass }) {
@@ -9,15 +11,7 @@ class CalendarColumn extends Component {
     this._calendarColumn = super._getTemplate();
     this._dateElement = this._calendarColumn.querySelector(dateCellSelector);
     this._currentDayClass = currentDayClass;
-  }
-
-  createCalendarColumn() {
-    const columnDate = new Date(this._column.date);
-    this._dateElement.textContent = refineToNumericDDMM(columnDate);
-    if (this._column.date === ProjectState.currentDateNumeric) {
-      this._calendarColumn.classList.add(this._currentDayClass);
-    }
-    return this._calendarColumn;
+    this._dayTasksSchema = {};
   }
 
   _getTasksForCurrentDay(tasks) {
@@ -29,10 +23,9 @@ class CalendarColumn extends Component {
     );
   }
 
-  getDayTasksSchema(tasks) {
-    this._tasksForCurrentDay = this._getTasksForCurrentDay(tasks);
+  _getDayTasksSchema() {
+    this._tasksForCurrentDay = this._getTasksForCurrentDay(ProjectState.assignedTasks);
 
-    this._dayTasksSchema = {};
     if (this._tasksForCurrentDay) {
       this._tasksForCurrentDay.forEach((task) => {
         if (!this._dayTasksSchema[task.executor]) {
@@ -42,7 +35,30 @@ class CalendarColumn extends Component {
         }
       });
     }
-    return this._dayTasksSchema;
+  }
+
+  createCells() {
+    this._getDayTasksSchema();
+    for (let i = 0; i < ProjectState.users.length; i += 1) {
+      const userId = ProjectState.usersIds[i];
+      const columnCell = new CalendarCell(
+        { executor: userId, date: this._column.date, tasks: this._dayTasksSchema[userId] ?? [] },
+        calendarCellSelectors
+      );
+      const cellElement = columnCell.createCell();
+      columnCell.renderItems();
+      this.addItem(cellElement);
+    }
+  }
+
+  createCalendarColumn() {
+    const columnDate = new Date(this._column.date);
+    this._dateElement.textContent = refineToNumericDDMM(columnDate);
+    if (this._column.date === ProjectState.currentDateNumeric) {
+      this._calendarColumn.classList.add(this._currentDayClass);
+    }
+    this.createCells();
+    return this._calendarColumn;
   }
 
   addItem(item) {

@@ -9,6 +9,10 @@ class CalendarCell extends Component {
     this._cellElement = super._getTemplate();
   }
 
+  _addItem(item) {
+    this._cellElement.append(item);
+  }
+
   createCell() {
     this._cellElement.setAttribute('data-executor', this._cell.executor);
     this._cellElement.setAttribute('data-date', this._cell.date);
@@ -16,14 +20,10 @@ class CalendarCell extends Component {
     return this._cellElement;
   }
 
-  addItem(item) {
-    this._cellElement.append(item);
-  }
-
   renderItems() {
     this._cell.tasks.forEach((task) => {
       const newTask = new CalendarTask(task, calendarTaskSelectors);
-      this.addItem(newTask.createTask());
+      this._addItem(newTask.createTask());
     });
   }
 }
