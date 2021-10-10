@@ -1,8 +1,10 @@
 @import url(./styles/vendor/normalize.css);
 @import url(./styles/body.css);
-@import url(./styles/page.css);
 @import url(./styles/main-title.css);
 @import url(./styles/button.css);
+@import url(./styles/popup.css);
+@import url(./styles/lead.css);
+@import url(./styles/content.css);
 /* анимации */
 @import url(./styles/anim-slide-in.css);
 /* компоненты */

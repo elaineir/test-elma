@@ -1,0 +1,16 @@
+.lead {
+  position: relative;
+  max-width: var(--maxContentWidth);
+  margin: 0 auto;
+  padding-top: 30px;
+}
+
+.lead__theme-btn {
+  position: absolute;
+  top: 30px;
+  right: 0;
+}
+
+.lead__main-title {
+  margin-left: 70px;
+}

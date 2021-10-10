@@ -5,14 +5,24 @@ import {
   backlogCardSelectors,
   calendarColumnSelectors,
   fullDayInMilliseconds,
+  popupSelectors,
   toggleThemeSettings,
   usersCardSelectors,
+  weekButtonsSelectors,
 } from './config/constants';
 import { TASKS_ROUTE, USERS_ROUTE } from './config/config';
-import { BacklogCard, Calendar, CalendarColumn, RendererSection, UserCard } from './components';
+import {
+  BacklogCard,
+  Calendar,
+  CalendarColumn,
+  PopupError,
+  RendererSection,
+  UserCard,
+} from './components';
 import ProjectState from './state/ProjectState';
 import { refineToNumericYYMMDD } from './utils/handle-dates';
 
+const popupError = new PopupError(popupSelectors);
 // контейнеры-рендереры
 const backlogList = new RendererSection(backlogCardSelectors.parentSelector);
 const usersList = new RendererSection(usersCardSelectors.parentSelector);
@@ -65,7 +75,7 @@ const getInitialData = async () => {
     renderBacklogTasks();
     renderColumns();
   } catch (err) {
-    console.log(err);
+    popupError.open();
   }
 };
 
@@ -84,8 +94,8 @@ const showPrevWeek = () => {
   renderColumns();
 };
 
-const nextWeekButton = document.querySelector('.button_next');
-const prevWeekButton = document.querySelector('.button_prev');
+const nextWeekButton = document.querySelector(weekButtonsSelectors.nextWeekButton);
+const prevWeekButton = document.querySelector(weekButtonsSelectors.prevWeekButton);
 
 nextWeekButton.addEventListener('click', showNextWeek);
 prevWeekButton.addEventListener('click', showPrevWeek);

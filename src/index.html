@@ -11,10 +11,10 @@
     <title>Планировщик</title>
   </head>
   <body class="body">
-    <div class="page">
-      <h1 class="main-title page__main-title">Планировщик</h1>
+    <div class="lead">
+      <h1 class="main-title lead__main-title">Планировщик</h1>
       <button
-        class="button button_theme page__theme-btn"
+        class="button button_theme lead__theme-btn"
         type="button"
         aria-label="Сменить цветовую схему"
       >
@@ -30,7 +30,8 @@
           />
         </svg>
       </button>
-
+    </div>
+    <div class="content">
       <div class="board-container">
         <button
           class="button button_prev board-container__button"
@@ -64,6 +65,10 @@
           <!-- сюда будут рендериться таски -->
         </ul>
       </div>
+    </div>
+
+    <div class="popup popup_error">
+      <p class="popup__info">Что-то пошло не так :(</p>
     </div>
   </body>
 
@@ -101,7 +106,8 @@
           Дата начала: <span class="calendar-task__date-span calendar-task__date-span_start"></span>
         </p>
         <p class="calendar-task__date">
-          Дата окончания: <span class="calendar-task__date-span calendar-task__date-span_end"></span>
+          Дата окончания:
+          <span class="calendar-task__date-span calendar-task__date-span_end"></span>
         </p>
       </div>
     </div>

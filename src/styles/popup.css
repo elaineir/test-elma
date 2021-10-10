@@ -1,0 +1,26 @@
+.popup {
+  box-sizing: border-box;
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-200px);
+  padding: 10px;
+  border-radius: 10px;
+  transition: var(--transitionBase);
+}
+
+.popup_error {
+  background-color: var(--colorDanger);
+}
+
+.popup_open {
+  transform: translateX(-50%) translateY(0);
+}
+
+.popup__info {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  color: var(--colorTextTertiary);
+}

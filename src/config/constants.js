@@ -49,6 +49,16 @@ export const calendarTaskSelectors = {
   endDateSelector: '.calendar-task__date-span_end',
 };
 
+export const weekButtonsSelectors = {
+  nextWeekButton: '.button_next',
+  prevWeekButton: '.button_prev',
+};
+
+export const popupSelectors = {
+  popupError: '.popup_error',
+  popupOpenClass: 'popup_open',
+};
+
 export const dateSettings = {
   locale: 'ru-RU',
   options: {

@@ -50,10 +50,6 @@ class ProjectState {
     return this._users;
   }
 
-  set calendarLength(value) {
-    this._calendarLength = value;
-  }
-
   get calendarLength() {
     return this._calendarLength;
   }
