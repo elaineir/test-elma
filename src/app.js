@@ -1,18 +1,17 @@
 import './index.css';
-import initToggleColorTheme from './utils/toggle-color-theme';
-import getData from './api/main-api';
+import ProjectState from './state/ProjectState';
 import {
   backlogCardSelectors,
   calendarColumnSelectors,
   fullDayInMilliseconds,
   popupSelectors,
-  searchFormSelectors,
-  timerDelay,
   toggleThemeSettings,
   usersCardSelectors,
-  weekButtonsSelectors,
 } from './config/constants';
 import { TASKS_ROUTE, USERS_ROUTE } from './config/config';
+import { refineToNumericYYMMDD } from './utils/handle-dates';
+import { initSwitchBetweenWeeks, initToggleColorTheme } from './utils';
+import getData from './api/main-api';
 import {
   BacklogCard,
   Calendar,
@@ -21,8 +20,7 @@ import {
   RendererSection,
   UserCard,
 } from './components';
-import ProjectState from './state/ProjectState';
-import { refineToNumericYYMMDD } from './utils/handle-dates';
+import initSearch from './utils/search';
 
 const popupError = new PopupError(popupSelectors);
 // контейнеры-рендереры
@@ -89,53 +87,10 @@ const getInitialData = async () => {
 getInitialData();
 
 // поиск
-const searchForm = document.querySelector(searchFormSelectors.searchForm);
-const searchInput = searchForm.querySelector(searchFormSelectors.searchInput);
-
-const handleSearch = (evt) => {
-  evt.preventDefault();
-  const keyword = searchInput.value;
-  const result = ProjectState.backlogTasks.filter((task) =>
-    task.subject.toLowerCase().includes(keyword.toLowerCase())
-  );
-  backlogList.clearItems();
-
-  if (result.length) {
-    result.forEach((task) => {
-      const backlogCard = createBacklogCard(task);
-      backlogList.addItem(backlogCard);
-    });
-  } else {
-    backlogList.addTextContent('Ничего не нашлось');
-    setTimeout(() => {
-      backlogList.clearItems();
-      renderBacklogTasks();
-    }, timerDelay);
-  }
-};
-
-searchForm.addEventListener('submit', handleSearch);
-
+initSearch(backlogList, createBacklogCard, renderBacklogTasks);
 // перелистывание календаря
-const showNextWeek = () => {
-  calendarContainer.clearItems();
-  ProjectState.startDay += fullDayInMilliseconds * 7;
-  renderColumns();
-};
-
-const showPrevWeek = () => {
-  calendarContainer.clearItems();
-  ProjectState.startDay -= fullDayInMilliseconds * 7;
-  renderColumns();
-};
-
-const nextWeekButton = document.querySelector(weekButtonsSelectors.nextWeekButton);
-const prevWeekButton = document.querySelector(weekButtonsSelectors.prevWeekButton);
-
-nextWeekButton.addEventListener('click', showNextWeek);
-prevWeekButton.addEventListener('click', showPrevWeek);
-
-// инициализация переключателя темы
+initSwitchBetweenWeeks(calendarContainer.clearItems, renderColumns);
+// переключение темы
 initToggleColorTheme(toggleThemeSettings);
 
 // добавление наблюдателей в стейт для ререндера

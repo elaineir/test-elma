@@ -62,6 +62,7 @@ export const popupSelectors = {
 export const searchFormSelectors = {
   searchForm: '.search-form',
   searchInput: '.search-form__input',
+  submitButton: '.button_search',
 };
 
 export const dateSettings = {
