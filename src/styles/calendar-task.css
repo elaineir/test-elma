@@ -4,17 +4,22 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 5px;
   background-color: var(--colorUICardBoard);
-  border-radius: 10px;
+  border-radius: 5px;
 }
 
 .calendar-task__title {
   margin: 0 auto;
-  font-size: 16px;
+  max-width: 130px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.2;
+  color: var(--colorTextPrimary);
   pointer-events: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .calendar-task__popup {
@@ -22,10 +27,11 @@
   position: absolute;
   top: 15px;
   left: 15px;
-  width: 170%;
+  width: 250px;
   padding: 10px;
   background-color: var(--colorUICardBacklog);
   border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
@@ -36,7 +42,7 @@
   visibility: visible;
   pointer-events: all;
   z-index: 1;
-  animation: slide-in .3s ease-out .2s forwards;
+  animation: slide-in-right-left .3s ease-out .2s forwards;
 }
 
 .calendar-task__subtitle {
@@ -45,10 +51,14 @@
   font-weight: 500;
   line-height: 1.2;
   color: var(--colorTextSecondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .calendar-task__description {
   margin: 0 0 10px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.2;
   color: var(--colorTextPrimary);
@@ -68,4 +78,86 @@
 
 .calendar-task__date-span {
   color: var(--colorTextPrimary);
+}
+
+@media screen and (max-width: 1600px){
+  .calendar-task__title {
+    max-width: 90px;
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 1280px){
+  .calendar-task__title {
+    font-size: 10px;
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .calendar-task__title {
+    font-size: 8px;
+    font-weight: 400;
+  }
+
+  .calendar-task__popup {
+    width: 150px;
+    top: 10px;
+    left: auto;
+    right: 0;
+    padding: 5px;
+  }
+
+  .calendar-task:hover .calendar-task__popup {
+    animation: slide-in-bottom-up .3s ease-out .2s forwards;
+  }
+
+  .calendar-task__description, .calendar-task__date {
+    font-size: 12px;
+  }
+
+  .calendar-task__subtitle {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .calendar-task {
+    padding: 2px;
+  }
+
+  .calendar-task__title {
+    max-width: 45px;
+  }
+
+  .calendar-task__popup {
+    width: 120px;
+  }
+
+  .calendar-task__description, .calendar-task__date {
+    font-size: 10px;
+  }
+
+  .calendar-task__subtitle {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 540px){
+  .calendar-task__title {
+    max-width: 35px;
+  }
+
+  .calendar-task__popup {
+    width: 100px;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .calendar-task__title {
+    max-width: 25px;
+  }
+
+  .calendar-task__popup {
+    width: 85px;
+  }
 }

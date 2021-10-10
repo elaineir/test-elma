@@ -65,6 +65,13 @@ export const searchFormSelectors = {
   submitButton: '.button_search',
 };
 
+export const preloaderStateSelectors = {
+  pageSelector: '.page',
+  pageHiddenClass: 'page_hidden',
+  preloaderSelector: '.preloader',
+  preloaderVisibleClass: 'preloader_visible',
+};
+
 export const dateSettings = {
   locale: 'ru-RU',
   options: {

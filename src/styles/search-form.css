@@ -9,10 +9,21 @@
 .search-form__input {
   box-sizing: border-box;
   flex-grow: 1;
+  width: calc(100% - 35px);
   font-size: 18px;
   color: var(--colorTextPrimary);
   line-height: 1.2;
   padding: 0 5px;
   background-color: transparent;
   border: none;
+}
+
+@media screen and (max-width: 1280px){
+  .search-form {
+    padding: 3px;
+  }
+
+  .search-form__input {
+    font-size: 12px;
+  }
 }

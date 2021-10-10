@@ -1,4 +1,5 @@
 .board-container {
+  position: relative;
   width: 100%;
   display: flex;
   align-items: center;
@@ -12,4 +13,67 @@
 
 .board-container__button {
   flex-shrink: 0;
+}
+
+@media screen and (max-width: 1600px){
+  .board-container__button {
+    position: absolute;
+    top: 10px;
+  }
+
+  .board-container__button.button_prev {
+    left: 30px;
+  }
+
+  .board-container__button.button_next {
+    left: 75px;
+  }
+}
+
+@media screen and (max-width: 1280px){
+  .board-container__button.button_prev {
+    left: 15px;
+  }
+
+  .board-container__button.button_next {
+    left: 55px;
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .board-container__button {
+    top: 5px;
+  }
+
+  .board-container__button.button_prev {
+    left: 10px;
+  }
+
+  .board-container__button.button_next {
+    left: 40px;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .board-container__button.button_prev {
+    left: 7px;
+  }
+
+  .board-container__button.button_next {
+    left: 28px;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .board-container__button {
+    top: 2px;
+  }
+
+  .board-container__button.button_prev {
+    left: 5px;
+  }
+
+  .board-container__button.button_next {
+    left: 26px;
+  }
 }

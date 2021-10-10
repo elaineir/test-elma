@@ -11,9 +11,10 @@
   --colorUICardBacklog: #E8E8E8;
   --colorDanger: #FF004D;
   --transitionBase: .3s ease;
-  --maxContentWidth: 1700px;
+  --maxContentWidth: 1740px;
 
   position: relative;
+  min-height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
   'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
   sans-serif;
@@ -31,11 +32,12 @@
   --colorBackground: #202020;
   --colorTextPrimary: #fff;
   --colorTextSecondary: #8B8B8B;
+  --colorTextTertiary: #fff;
   --colorUIPrimary: #202020;
   --colorUISecondary: #FF6838;
-  --colorUICalendar: #E8E8E8;
+  --colorUICalendar: #2F2F2F;
   --colorUIBorders: #424242;
-  --colorUICardBoard: #2BE080;
+  --colorUICardBoard: #424242;
   --colorUICardBacklog: #2F2F2F;
   --colorDanger: #FF004D;
 }

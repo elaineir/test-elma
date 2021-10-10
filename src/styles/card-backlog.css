@@ -1,6 +1,7 @@
 .card-backlog {
   box-sizing: border-box;
   padding: 10px;
+  text-align: left;
   border-radius: 5px;
   background-color: var(--colorUICardBacklog);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
@@ -46,4 +47,14 @@
 
 .card-backlog__date-span {
   color: var(--colorTextPrimary);
+}
+
+@media screen and (max-width: 1280px){
+  .card-backlog__title {
+    font-size: 14px;
+  }
+
+  .card-backlog__date {
+    font-size: 10px;
+  }
 }

@@ -1,5 +1,6 @@
 @import url(./styles/vendor/normalize.css);
 @import url(./styles/body.css);
+@import url(./styles/page.css);
 @import url(./styles/main-title.css);
 @import url(./styles/button.css);
 @import url(./styles/popup.css);
@@ -17,4 +18,4 @@
 @import url(./styles/backlog.css);
 @import url(./styles/search-form.css);
 @import url(./styles/card-backlog.css);
-
+@import url(./styles/preloader.css);

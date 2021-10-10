@@ -5,6 +5,7 @@ import {
   calendarColumnSelectors,
   fullDayInMilliseconds,
   popupSelectors,
+  preloaderStateSelectors,
   toggleThemeSettings,
   usersCardSelectors,
 } from './config/constants';
@@ -22,6 +23,8 @@ import {
 } from './components';
 import initSearch from './utils/search';
 
+const page = document.querySelector(preloaderStateSelectors.pageSelector);
+const preloader = document.querySelector(preloaderStateSelectors.preloaderSelector);
 const popupError = new PopupError(popupSelectors);
 // контейнеры-рендереры
 const backlogList = new RendererSection(backlogCardSelectors.parentSelector);
@@ -79,6 +82,8 @@ const getInitialData = async () => {
     renderUsers(users);
     renderBacklogTasks();
     renderColumns();
+    page.classList.remove(preloaderStateSelectors.pageHiddenClass);
+    preloader.classList.remove(preloaderStateSelectors.preloaderVisibleClass);
   } catch (err) {
     popupError.open();
   }

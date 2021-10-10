@@ -1,4 +1,4 @@
-@keyframes slide-in {
+@keyframes slide-in-right-left {
   0% {
     transform: translateX(50px);
     opacity: 0;
@@ -9,6 +9,21 @@
   }
 }
 
-.slide-in {
-  animation: slide-in .5s ease-out forwards;
+@keyframes slide-in-bottom-up {
+  0% {
+    transform: translateY(50px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-right-left {
+  animation: slide-in-right-left .5s ease-out forwards;
+}
+
+.slide-in-bottom-up {
+  animation: slide-in-bottom-up .5s ease-out forwards;
 }

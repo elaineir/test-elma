@@ -1,0 +1,10 @@
+.page {
+  position: relative;
+  max-width: var(--maxContentWidth);
+  transition: opacity var(--transitionBase);
+}
+
+.page_hidden {
+  visibility: hidden;
+  opacity: 0;
+}

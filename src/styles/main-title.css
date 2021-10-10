@@ -5,4 +5,13 @@
   line-height: 1;
   color: var(--colorTextPrimary);
   text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media screen and (max-width: 1280px){
+  .main-title {
+    font-size: 28px;
+  }
 }

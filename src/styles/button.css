@@ -56,3 +56,57 @@
 .button_theme_dark .button__svg-theme {
   transform: rotate(45deg);
 }
+
+@media screen and (max-width: 1600px){
+  .button_prev, .button_next {
+    width: 35px;
+    height: 35px;
+    background-size: 10px;
+  }
+
+  .button_prev {
+    background-position: 11px center;
+  }
+
+  .button_next {
+    background-position: 14px center;
+  }
+}
+
+@media screen and (max-width: 1280px){
+  .button_prev, .button_next {
+    width: 30px;
+    height: 30px;
+    background-size: 8px;
+  }
+
+  .button_prev {
+    background-position: 10px center;
+  }
+
+  .button_next {
+    background-position: 12px center;
+  }
+
+  .button_search {
+    width: 25px;
+    height: 25px;
+    background-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .button_prev, .button_next {
+    width: 20px;
+    height: 20px;
+    background-size: 5px;
+  }
+
+  .button_prev {
+    background-position: 7px center;
+  }
+
+  .button_next {
+    background-position: 9px center;
+  }
+}

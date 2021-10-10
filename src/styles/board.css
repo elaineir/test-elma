@@ -27,3 +27,45 @@
   column-gap: 5px;
 }
 
+@media screen and (max-width: 1280px){
+  .board {
+    grid-template-columns: minmax(50px, 80px) 1fr;
+    gap: 3px;
+  }
+
+  .board__users {
+    row-gap: 3px;
+  }
+
+  .board__calendar {
+    column-gap: 3px;
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .board {
+    grid-template-columns: 60px 1fr;
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 767px){
+  .board {
+    grid-template-columns: 45px 1fr;
+    gap: 1px;
+  }
+
+  .board__users {
+    row-gap: 1px;
+  }
+
+  .board__calendar {
+    column-gap: 1px;
+  }
+}
+
+@media screen and (max-width: 400px){
+  .board {
+    padding: 3px;
+  }
+}
