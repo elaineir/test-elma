@@ -1,9 +1,11 @@
 import { dateSettings } from '../config/constants';
 
-const refineDate = (date) =>
+const refineToString = (date) =>
   new Date(date).toLocaleDateString(dateSettings.locale, dateSettings.options);
 
-const refineToNumericDate = (date) =>
+const refineToNumericDDMM = (date) =>
   new Date(date).toLocaleDateString(dateSettings.locale, dateSettings.numeric);
 
-export { refineDate, refineToNumericDate };
+const refineToNumericYYMMDD = (date) => new Date(date).toLocaleDateString('en-CA');
+
+export { refineToString, refineToNumericDDMM, refineToNumericYYMMDD };

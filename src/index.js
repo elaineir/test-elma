@@ -10,19 +10,28 @@ import {
   usersCardSelectors,
 } from './config/constants';
 import { TASKS_ROUTE, USERS_ROUTE } from './config/config';
-import { BacklogCard, CalendarCell, CalendarColumn, RendererSection, UserCard } from './components';
+import {
+  BacklogCard,
+  Calendar,
+  CalendarCell,
+  CalendarColumn,
+  RendererSection,
+  UserCard,
+} from './components';
 import ProjectState from './state/ProjectState';
+import { refineToNumericYYMMDD } from './utils/handle-dates';
 
 ProjectState.defineStartDay();
 
 // контейнеры-рендереры
 const backlogList = new RendererSection(backlogCardSelectors.parentSelector);
-const calendarContainer = new RendererSection(calendarColumnSelectors.parentSelector);
 const usersList = new RendererSection(usersCardSelectors.parentSelector);
+const calendarContainer = new Calendar(calendarColumnSelectors.parentSelector);
+calendarContainer.setEventListeners();
 
 const createCell = ({ date, tasksSchema, index }) => {
   const columnCell = new CalendarCell(
-    { executor: ProjectState.usersIds[index], date, tasks: tasksSchema[index] ?? [] },
+    { executor: index, date, tasks: tasksSchema[index] ?? [] },
     calendarCellSelectors
   );
   const cellElement = columnCell.createCell();
@@ -34,7 +43,7 @@ const renderColumns = () => {
   const rowCount = Object.keys(ProjectState.usersIds).length;
   for (let i = 0; i < ProjectState.calendarLength; i += 1) {
     const columnDate = ProjectState.startDay + fullDayInMilliseconds * i;
-    const formattedDate = new Date(columnDate).toLocaleDateString('en-CA');
+    const formattedDate = refineToNumericYYMMDD(columnDate);
 
     const calendarColumn = new CalendarColumn({ date: formattedDate }, calendarColumnSelectors);
     calendarContainer.addItem(calendarColumn.createCalendarColumn());

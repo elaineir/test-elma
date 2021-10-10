@@ -6,37 +6,41 @@ export const toggleThemeSettings = {
 };
 
 export const backlogCardSelectors = {
+  parentSelector: '.backlog__tasks-container',
   templateSelector: '.template-card-backlog',
   elementSelector: '.card-backlog',
   titleSelector: '.card-backlog__title',
   descriptionSelector: '.card-backlog__description',
   startDateSelector: '.card-backlog__date-span_start',
   endDateSelector: '.card-backlog__date-span_end',
-  parentSelector: '.backlog__tasks-container',
 };
 
 export const usersCardSelectors = {
+  parentSelector: '.board__users',
   templateSelector: '.template-card-user',
   elementSelector: '.card-user',
   userNameSelector: '.card-user__name',
-  parentSelector: '.board__users',
+  dragOverClass: 'card-user_drag-over',
 };
 
 export const calendarColumnSelectors = {
+  parentSelector: '.board__calendar',
   templateSelector: '.template-calendar-column',
   elementSelector: '.calendar-column',
   dateCellSelector: '.calendar-column__date',
-  parentSelector: '.board__calendar',
 };
 
 export const calendarCellSelectors = {
   templateSelector: '.template-calendar-cell',
   elementSelector: '.calendar-cell',
+  elementClass: 'calendar-cell',
+  dragOverClass: 'calendar-cell_drag-over',
 };
 
 export const calendarTaskSelectors = {
   templateSelector: '.template-calendar-task',
   elementSelector: '.calendar-task',
+  elementClass: 'calendar-task',
   titleSelector: '.calendar-task__title',
   subtitleSelector: '.calendar-task__subtitle',
   descriptionSelector: '.calendar-task__description',

@@ -1,5 +1,5 @@
 import Component from './Component';
-import { refineDate } from '../utils/handle-dates';
+import { refineToString } from '../utils/handle-dates';
 
 class BacklogCard extends Component {
   constructor(
@@ -27,8 +27,8 @@ class BacklogCard extends Component {
   createCard() {
     this._cardTitle.textContent = this._cardData.subject;
     this._cardDescription.textContent = this._cardData.description;
-    this._cardStartDate.textContent = refineDate(this._cardData.planStartDate);
-    this._cardEndDate.textContent = refineDate(this._cardData.planEndDate);
+    this._cardStartDate.textContent = refineToString(this._cardData.planStartDate);
+    this._cardEndDate.textContent = refineToString(this._cardData.planEndDate);
     this._backlogCard.setAttribute('id', this._cardData.id);
     return this._backlogCard;
   }

@@ -1,5 +1,5 @@
 import Component from './Component';
-import { refineToNumericDate } from '../utils/handle-dates';
+import { refineToNumericDDMM } from '../utils/handle-dates';
 
 class CalendarColumn extends Component {
   constructor(column, { templateSelector, elementSelector, dateCellSelector }) {
@@ -10,13 +10,16 @@ class CalendarColumn extends Component {
   }
 
   createCalendarColumn() {
-    this._dateElement.textContent = refineToNumericDate(new Date(this._column.date));
+    this._dateElement.textContent = refineToNumericDDMM(new Date(this._column.date));
     return this._calendarColumn;
   }
 
   _getTasksForCurrentDay(tasks) {
+    const parsedColumnDate = Date.parse(this._column.date);
     return tasks.filter(
-      (task) => task.planStartDate <= this._column.date && this._column.date <= task.planEndDate
+      (task) =>
+        Date.parse(task.planStartDate) <= parsedColumnDate &&
+        parsedColumnDate <= Date.parse(task.planEndDate)
     );
   }
 

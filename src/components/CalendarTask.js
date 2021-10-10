@@ -1,5 +1,5 @@
 import Component from './Component';
-import { refineDate } from '../utils/handle-dates';
+import { refineToString } from '../utils/handle-dates';
 
 class CalendarTask extends Component {
   constructor(
@@ -28,8 +28,8 @@ class CalendarTask extends Component {
     this._titleELement.textContent = this._task.subject;
     this._subtitleELement.textContent = this._task.subject;
     this._descriptionElement.textContent = this._task.description;
-    this._startDateElement.textContent = refineDate(this._task.planStartDate);
-    this._endDateElement.textContent = refineDate(this._task.planEndDate);
+    this._startDateElement.textContent = refineToString(this._task.planStartDate);
+    this._endDateElement.textContent = refineToString(this._task.planEndDate);
 
     return this._taskElement;
   }

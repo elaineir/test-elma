@@ -1,3 +1,6 @@
+import { ASSIGN_BY_DATE } from './types';
+import { refineToNumericYYMMDD } from '../utils/handle-dates';
+
 class ProjectState {
   constructor() {
     this._subscribers = [];
@@ -40,20 +43,25 @@ class ProjectState {
     this._assignedTasks.push(task);
   }
 
-  assignTask({ type, taskId, executorId }) {
+  assignTask({ type, taskId, executorId, startDate }) {
     const taskToBeAssigned = this._backlogTasks.find((task) => taskId === task.id);
-    taskToBeAssigned.executor = executorId;
+    taskToBeAssigned.executor = +executorId;
 
-    if (type === 'byExecutor') {
-      // запрос из колонки исполнителей
-      this.addTaskToAssignedTasks(taskToBeAssigned);
-      this._removeTaskFromBacklog(taskId);
-      this._callSubscribers();
-    } else {
-      // запрос из календаря
+    // запрос из календаря
+    if (type === ASSIGN_BY_DATE) {
+      if (taskToBeAssigned.planEndDate === taskToBeAssigned.planStartDate) {
+        taskToBeAssigned.planEndDate = startDate;
+      } else {
+        const dateDifference =
+          Date.parse(taskToBeAssigned.planEndDate) - Date.parse(taskToBeAssigned.planStartDate);
+        const newEndDate = Date.parse(startDate) + dateDifference;
+        taskToBeAssigned.planEndDate = refineToNumericYYMMDD(newEndDate);
+      }
+      taskToBeAssigned.planStartDate = startDate;
     }
-    console.log(this._assignedTasks);
-    console.log(this._backlogTasks);
+    this.addTaskToAssignedTasks(taskToBeAssigned);
+    this._removeTaskFromBacklog(taskId);
+    this._callSubscribers();
   }
 
   addTaskToBacklog(task) {
