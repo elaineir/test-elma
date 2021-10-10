@@ -32,7 +32,16 @@ export const calendarColumnSelectors = {
 export const calendarCellSelectors = {
   templateSelector: '.template-calendar-cell',
   elementSelector: '.calendar-cell',
-  titleSelector: '.calendar-cell__title',
+};
+
+export const calendarTaskSelectors = {
+  templateSelector: '.template-calendar-task',
+  elementSelector: '.calendar-task',
+  titleSelector: '.calendar-task__title',
+  subtitleSelector: '.calendar-task__subtitle',
+  descriptionSelector: '.calendar-task__description',
+  startDateSelector: '.calendar-task__date-span_start',
+  endDateSelector: '.calendar-task__date-span_end',
 };
 
 export const dateSettings = {

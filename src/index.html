@@ -68,12 +68,14 @@
   </body>
 
   <!-- templates -->
+  <!-- карточка исполнителя -->
   <template class="template-card-user">
     <div class="card-user">
       <p class="card-user__name">Имя Фамилия</p>
     </div>
   </template>
 
+  <!-- колонка календаря -->
   <template class="template-calendar-column">
     <div class="calendar-column">
       <div class="calendar-column__date">Дата</div>
@@ -81,12 +83,31 @@
     </div>
   </template>
 
+  <!-- ячейка календаря -->
   <template class="template-calendar-cell">
     <div class="calendar-cell">
-      <h3 class="calendar-cell__title">Заголовок</h3>
+      <!-- сюда будут рендериться задания -->
     </div>
   </template>
 
+  <!-- карточка задания в календаре -->
+  <template class="template-calendar-task">
+    <div class="calendar-task">
+      <h2 class="calendar-task__title">Заголовок</h2>
+      <div class="calendar-task__popup">
+        <h3 class="calendar-task__subtitle">Заголовок</h3>
+        <p class="calendar-task__description">Описание</p>
+        <p class="calendar-task__date">
+          Дата начала: <span class="calendar-task__date-span calendar-task__date-span_start"></span>
+        </p>
+        <p class="calendar-task__date">
+          Дата окончания: <span class="calendar-task__date-span calendar-task__date-span_end"></span>
+        </p>
+      </div>
+    </div>
+  </template>
+
+  <!-- карточка задания в бэклоге -->
   <template class="template-card-backlog">
     <li class="card-backlog" draggable="true">
       <h3 class="card-backlog__title">Заголовок</h3>
@@ -94,7 +115,7 @@
       <p class="card-backlog__date">
         Дата начала: <span class="card-backlog__date-span card-backlog__date-span_start"></span>
       </p>
-      <p class="card-backlog__date card-backlog__date_end">
+      <p class="card-backlog__date">
         Дата окончания: <span class="card-backlog__date-span card-backlog__date-span_end"></span>
       </p>
     </li>

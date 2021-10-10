@@ -1,0 +1,70 @@
+.calendar-task {
+  box-sizing: border-box;
+  flex-grow: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: var(--colorUICardBoard);
+  border-radius: 10px;
+}
+
+.calendar-task__title {
+  margin: 0 auto;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.calendar-task__popup {
+  box-sizing: border-box;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 170%;
+  padding: 10px;
+  background-color: var(--colorUICardBacklog);
+  border-radius: 10px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: var(--transitionBase);
+}
+
+.calendar-task:hover .calendar-task__popup {
+  visibility: visible;
+  pointer-events: all;
+  z-index: 1;
+  animation: slide-in .3s ease-out forwards;
+}
+
+.calendar-task__subtitle {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--colorTextSecondary);
+}
+
+.calendar-task__description {
+  margin: 0 0 10px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--colorTextPrimary);
+}
+
+.calendar-task__date {
+  margin: 0 0 10px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.1;
+  color: var(--colorTextSecondary);
+}
+
+.calendar-task__date:last-of-type {
+  margin-bottom: 0;
+}
+
+.calendar-task__date-span {
+  color: var(--colorTextPrimary);
+}

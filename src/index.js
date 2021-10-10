@@ -10,7 +10,7 @@ import {
   usersCardSelectors,
 } from './config/constants';
 import { TASKS_ROUTE, USERS_ROUTE } from './config/config';
-import { BacklogCard, CalendarColumn, ColumnCell, RendererSection, UserCard } from './components';
+import { BacklogCard, CalendarCell, CalendarColumn, RendererSection, UserCard } from './components';
 import BoardState from './state/BoardState';
 
 // инициализация стейта проекта
@@ -23,11 +23,13 @@ const calendarContainer = new RendererSection(calendarColumnSelectors.parentSele
 const usersList = new RendererSection(usersCardSelectors.parentSelector);
 
 const createCell = ({ date, tasksSchema, index }) => {
-  const columnCell = new ColumnCell(
+  const columnCell = new CalendarCell(
     { executor: ProjectState.usersIds[index], date, tasks: tasksSchema[index] ?? [] },
     calendarCellSelectors
   );
-  return columnCell.createCell();
+  const cellElement = columnCell.createCell();
+  columnCell.renderItems();
+  return cellElement;
 };
 
 const renderColumns = () => {
@@ -82,6 +84,8 @@ const getInitialData = () => {
           backlogList.addItem(backlogCard.createCard());
         }
       });
+      console.log(ProjectState.assignedTasks);
+
       // отрисовка users в таблицу
       users.forEach((user) => {
         const userCard = new UserCard(user, usersCardSelectors);

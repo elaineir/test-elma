@@ -2,12 +2,16 @@
 @import url(./styles/body.css);
 @import url(./styles/page.css);
 @import url(./styles/main-title.css);
+@import url(./styles/button.css);
+/* анимации */
+@import url(./styles/anim-slide-in.css);
+/* компоненты */
 @import url(./styles/board-container.css);
 @import url(./styles/board.css);
 @import url(./styles/card-user.css);
 @import url(./styles/calendar-column.css);
 @import url(./styles/calendar-cell.css);
-@import url(./styles/button.css);
+@import url(./styles/calendar-task.css);
 @import url(./styles/backlog.css);
 @import url(./styles/search-form.css);
 @import url(./styles/card-backlog.css);

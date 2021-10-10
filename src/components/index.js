@@ -1,7 +1,8 @@
 import BacklogCard from './BacklogCard';
 import CalendarColumn from './CalendarColumn';
-import ColumnCell from './ColumnCell';
+import CalendarCell from './CalendarCell';
+import CalendarTask from './CalendarTask';
 import RendererSection from './RendererSection';
 import UserCard from './UserCard';
 
-export { BacklogCard, CalendarColumn, ColumnCell, RendererSection, UserCard };
+export { BacklogCard, CalendarColumn, CalendarCell, CalendarTask, RendererSection, UserCard };
