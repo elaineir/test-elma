@@ -37,24 +37,23 @@ const datesContainer = new RendererSection(calendarDateSelectors.parentSelector)
 const calendarContainer = new Calendar(calendarColumnSelectors.parentSelector);
 calendarContainer.setEventListeners();
 
-const renderCalendarItems = (ItemConstructor, parentContainer, selectors, isAnimated) => {
+const renderCalendar = (isAnimated) => {
   for (let i = 0; i < ProjectState.calendarLength; i += 1) {
     const thisDate = ProjectState.startDay + fullDayInMilliseconds * i;
     const dateString = refineToNumericYYMMDD(thisDate);
 
-    const thisItem = new ItemConstructor({ date: dateString }, selectors);
-    const dateElement = thisItem.createElement();
+    const dateObject = new CalendarDate({ date: dateString }, calendarDateSelectors);
+    const columnObject = new CalendarColumn({ date: dateString }, calendarColumnSelectors);
+    const dateElement = dateObject.createElement();
+    const columnElement = columnObject.createElement();
     if (isAnimated) {
       applySlideInRightLeftAnim(dateElement, i, ProjectState.calendarLength - 1);
+      applySlideInRightLeftAnim(columnElement, i, ProjectState.calendarLength - 1);
     }
-    parentContainer.addItem(dateElement);
+    datesContainer.addItem(dateElement);
+    calendarContainer.addItem(columnElement);
   }
 };
-
-const renderDates = (isAnimated) =>
-  renderCalendarItems(CalendarDate, datesContainer, calendarDateSelectors, isAnimated);
-const renderColumns = (isAnimated) =>
-  renderCalendarItems(CalendarColumn, calendarContainer, calendarColumnSelectors, isAnimated);
 
 const createBacklogCard = (task) => {
   const backlogCard = new BacklogCard(task, backlogCardSelectors);
@@ -100,8 +99,7 @@ const getInitialData = async () => {
     ProjectState.mapUsersIds(users);
     // рендеринг
     renderUsers(users, true);
-    renderDates(true);
-    renderColumns(true);
+    renderCalendar(true);
     renderBacklogTasks(true);
   } catch (err) {
     popupError.open();
@@ -115,12 +113,7 @@ getInitialData();
 // поиск
 initSearch(backlogList, createBacklogCard, renderBacklogTasks);
 // перелистывание календаря
-initSwitchBetweenWeeks(
-  calendarContainer.clearItems,
-  datesContainer.clearItems,
-  renderDates,
-  renderColumns
-);
+initSwitchBetweenWeeks(calendarContainer.clearItems, datesContainer.clearItems, renderCalendar);
 // переключение темы
 initToggleColorTheme(toggleThemeSettings);
 
@@ -128,6 +121,6 @@ initToggleColorTheme(toggleThemeSettings);
 ProjectState.addSubscribers([
   calendarContainer.clearItems,
   backlogList.clearItems,
-  renderColumns,
+  renderCalendar,
   renderBacklogTasks,
 ]);
