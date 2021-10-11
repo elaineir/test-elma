@@ -27,8 +27,8 @@
   box-sizing: border-box;
   position: absolute;
   top: 15px;
-  left: 15px;
-  width: 250px;
+  right: 5px;
+  width: 200px;
   padding: 10px;
   background-color: var(--colorUICardBacklog);
   border-radius: 10px;
@@ -42,7 +42,7 @@
 .calendar-task:hover .calendar-task__popup {
   visibility: visible;
   pointer-events: all;
-  animation: slide-in-right-left .3s ease-out .2s forwards;
+  animation: slide-in-bottom-up .3s ease-out .2s forwards;
   z-index: 1;
 }
 
@@ -53,8 +53,6 @@
   line-height: 1.2;
   color: var(--colorTextPrimary);
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
 .calendar-task__description {
@@ -103,13 +101,8 @@
   .calendar-task__popup {
     width: 150px;
     top: 10px;
-    left: auto;
     right: -5px;
     padding: 5px;
-  }
-
-  .calendar-task:hover .calendar-task__popup {
-    animation: slide-in-bottom-up .3s ease-out .2s forwards;
   }
 
   .calendar-task__description, .calendar-task__date {

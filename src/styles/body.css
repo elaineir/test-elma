@@ -10,8 +10,10 @@
   --colorUICardBoard: #2BE080;
   --colorUICardBacklog: #E8E8E8;
   --colorDanger: #FF004D;
+  --colorThumb: #E8E8E8;
   --transitionBase: .3s ease;
   --maxContentWidth: 1740px;
+  --boardMaxHeight: 85vh;
 
   position: relative;
   min-height: 100vh;
@@ -40,4 +42,21 @@
   --colorUICardBoard: #073042;
   --colorUICardBacklog: #2F2F2F;
   --colorDanger: #FF004D;
+  --colorThumb: #424242;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background-color: var(--colorThumb);
 }

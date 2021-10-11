@@ -1,5 +1,6 @@
 .board {
   box-sizing: border-box;
+  max-height: inherit;
   display: grid;
   grid-template-areas:
     ". calendar"
@@ -11,6 +12,8 @@
   padding: 10px;
   background-color: var(--colorUIPrimary);
   border-radius: 10px;
+  overflow-y: scroll;
+  scrollbar-width: thin;
 }
 
 .board__users {
@@ -20,7 +23,6 @@
   display: flex;
   flex-direction: column;
   row-gap: 5px;
-  overflow: hidden;
 }
 
 .board__calendar {
@@ -50,7 +52,6 @@
     grid-template-columns: 60px 1fr;
     grid-template-rows: 20px 1fr;
     padding: 5px;
-    overflow: hidden;
   }
 }
 

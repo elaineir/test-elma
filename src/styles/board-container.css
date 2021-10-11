@@ -1,9 +1,12 @@
 .board-container {
+  box-sizing: border-box;
   position: relative;
   width: 100%;
+  max-height: var(--boardMaxHeight);
   display: flex;
   align-items: center;
   column-gap: 20px;
+  z-index: 0;
 }
 
 .board-container__board {
