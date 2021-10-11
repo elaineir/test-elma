@@ -12,6 +12,7 @@
   padding: 0 10px 10px;
   background-color: var(--colorUIPrimary);
   border-radius: 10px;
+  overflow-x: hidden;
   overflow-y: scroll;
   scrollbar-width: thin;
 }
