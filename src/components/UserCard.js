@@ -26,6 +26,7 @@ class UserCard extends Component {
   }
 
   _handleDrop(evt) {
+    evt.preventDefault();
     const taskId = evt.dataTransfer.getData('text/plain');
     ProjectState.assignTask({ type: ASSIGN_BY_USER, taskId, executorId: this._cardData.id });
     this._handleDragLeave();

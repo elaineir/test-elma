@@ -30,6 +30,7 @@ class Calendar extends RendererSection {
   }
 
   _handleDrop(evt) {
+    evt.preventDefault();
     const taskId = evt.dataTransfer.getData('text/plain');
     ProjectState.assignTask({
       type: ASSIGN_BY_DATE,
