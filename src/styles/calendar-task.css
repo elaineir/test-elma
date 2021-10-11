@@ -37,13 +37,13 @@
   visibility: hidden;
   pointer-events: none;
   transition: var(--transitionBase);
-  z-index: 2;
 }
 
 .calendar-task:hover .calendar-task__popup {
   visibility: visible;
   pointer-events: all;
   animation: slide-in-right-left .3s ease-out .2s forwards;
+  z-index: 1;
 }
 
 .calendar-task__subtitle {

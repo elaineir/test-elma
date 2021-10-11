@@ -22,6 +22,7 @@ import {
   UserCard,
 } from './components';
 import initSearch from './utils/search';
+import { applySlideInBottomUpAnim, applySlideInRightLeftAnim } from './utils/apply-style-animation';
 
 const page = document.querySelector(preloaderStateSelectors.pageSelector);
 const preloader = document.querySelector(preloaderStateSelectors.preloaderSelector);
@@ -32,13 +33,16 @@ const usersList = new RendererSection(usersCardSelectors.parentSelector);
 const calendarContainer = new Calendar(calendarColumnSelectors.parentSelector);
 calendarContainer.setEventListeners();
 
-const renderColumns = () => {
+const renderColumns = (isAnimated) => {
   for (let i = 0; i < ProjectState.calendarLength; i += 1) {
     const columnDate = ProjectState.startDay + fullDayInMilliseconds * i;
     const dateString = refineToNumericYYMMDD(columnDate);
 
     const calendarColumn = new CalendarColumn({ date: dateString }, calendarColumnSelectors);
     const columnElement = calendarColumn.createCalendarColumn();
+    if (isAnimated) {
+      applySlideInRightLeftAnim(columnElement, i);
+    }
     calendarContainer.addItem(columnElement);
   }
 };
@@ -51,16 +55,18 @@ const createBacklogCard = (task) => {
 };
 
 const renderBacklogTasks = () => {
-  ProjectState.backlogTasks.forEach((task) => {
+  ProjectState.backlogTasks.forEach((task, i) => {
     const backlogCard = createBacklogCard(task);
+    applySlideInBottomUpAnim(backlogCard, i);
     backlogList.addItem(backlogCard);
   });
 };
 
 const renderUsers = (users) =>
-  users.forEach((user) => {
+  users.forEach((user, i) => {
     const userCard = new UserCard(user, usersCardSelectors);
     const newUserCard = userCard.createCard();
+    applySlideInBottomUpAnim(newUserCard, i);
     userCard.setEventListeners();
     usersList.addItem(newUserCard);
   });
@@ -82,7 +88,7 @@ const getInitialData = async () => {
     // рендеринг
     renderUsers(users);
     renderBacklogTasks();
-    renderColumns();
+    renderColumns(true);
   } catch (err) {
     popupError.open();
   }
