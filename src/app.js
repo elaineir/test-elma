@@ -4,6 +4,7 @@ import {
   backlogCardSelectors,
   calendarColumnSelectors,
   fullDayInMilliseconds,
+  maxIndexForAnimation,
   popupSelectors,
   preloaderStateSelectors,
   toggleThemeSettings,
@@ -41,7 +42,7 @@ const renderColumns = (isAnimated) => {
     const calendarColumn = new CalendarColumn({ date: dateString }, calendarColumnSelectors);
     const columnElement = calendarColumn.createCalendarColumn();
     if (isAnimated) {
-      applySlideInRightLeftAnim(columnElement, i);
+      applySlideInRightLeftAnim(columnElement, i, ProjectState.calendarLength - 1);
     }
     calendarContainer.addItem(columnElement);
   }
@@ -54,10 +55,12 @@ const createBacklogCard = (task) => {
   return newBacklogCard;
 };
 
-const renderBacklogTasks = () => {
+const renderBacklogTasks = (isAnimated) => {
   ProjectState.backlogTasks.forEach((task, i) => {
     const backlogCard = createBacklogCard(task);
-    applySlideInBottomUpAnim(backlogCard, i);
+    if (isAnimated) {
+      applySlideInBottomUpAnim(backlogCard, i, maxIndexForAnimation.backlogCards);
+    }
     backlogList.addItem(backlogCard);
   });
 };
@@ -67,7 +70,7 @@ const renderUsers = (users, isAnimated) =>
     const userCard = new UserCard(user, usersCardSelectors);
     const newUserCard = userCard.createCard();
     if (isAnimated) {
-      applySlideInBottomUpAnim(newUserCard, i);
+      applySlideInBottomUpAnim(newUserCard, i, maxIndexForAnimation.users);
     }
     userCard.setEventListeners();
     usersList.addItem(newUserCard);
@@ -90,7 +93,7 @@ const getInitialData = async () => {
     // рендеринг
     renderUsers(users, true);
     renderColumns(true);
-    renderBacklogTasks();
+    renderBacklogTasks(true);
   } catch (err) {
     popupError.open();
   }
