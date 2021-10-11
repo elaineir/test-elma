@@ -11,11 +11,13 @@ class BacklogCard extends Component {
       descriptionSelector,
       startDateSelector,
       endDateSelector,
+      dragStartClass,
     }
   ) {
     super({ templateSelector, elementSelector });
     this._cardData = cardData;
     this._backlogCard = super._getTemplate();
+    this._dragStartClass = dragStartClass;
     this._cardTitle = this._backlogCard.querySelector(titleSelector);
     this._cardDescription = this._backlogCard.querySelector(descriptionSelector);
     this._cardStartDate = this._backlogCard.querySelector(startDateSelector);
@@ -25,13 +27,13 @@ class BacklogCard extends Component {
   }
 
   _handleDragStart(evt) {
-    this._backlogCard.classList.add('card-backlog_draggable');
+    this._backlogCard.classList.add(this._dragStartClass);
     evt.dataTransfer.setData('text/plain', this._cardData.id);
     evt.dataTransfer.effectAllowed = 'move';
   }
 
   _handleDragEnd() {
-    this._backlogCard.classList.remove('card-backlog_draggable');
+    this._backlogCard.classList.remove(this._dragStartClass);
   }
 
   createCard() {

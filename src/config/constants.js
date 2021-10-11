@@ -13,6 +13,7 @@ export const backlogCardSelectors = {
   descriptionSelector: '.card-backlog__description',
   startDateSelector: '.card-backlog__date-span_start',
   endDateSelector: '.card-backlog__date-span_end',
+  dragStartClass: 'card-backlog_draggable',
 };
 
 export const usersCardSelectors = {
