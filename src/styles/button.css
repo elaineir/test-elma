@@ -42,7 +42,7 @@
   opacity: .6;
   pointer-events: none;
 }
-
+ 
 .button_theme {
   fill: var(--colorTextPrimary);
   background-color: transparent;
