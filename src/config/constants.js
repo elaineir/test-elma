@@ -93,8 +93,8 @@ export const dateSettings = {
 };
 
 export const maxIndexForAnimation = {
-  users: 4,
-  backlogCards: 6,
+  users: 8,
+  backlogCards: 12,
 };
 
 export const fullDayInMilliseconds = 3600 * 24 * 1000;

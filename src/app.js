@@ -47,8 +47,8 @@ const renderCalendar = (isAnimated) => {
     const dateElement = dateObject.createElement();
     const columnElement = columnObject.createElement();
     if (isAnimated) {
-      applySlideInRightLeftAnim(dateElement, i, ProjectState.calendarLength - 1);
-      applySlideInRightLeftAnim(columnElement, i, ProjectState.calendarLength - 1);
+      applySlideInRightLeftAnim(dateElement, i);
+      applySlideInRightLeftAnim(columnElement, i);
     }
     datesContainer.addItem(dateElement);
     calendarContainer.addItem(columnElement);
@@ -65,8 +65,8 @@ const createBacklogCard = (task) => {
 const renderBacklogTasks = (isAnimated) => {
   ProjectState.backlogTasks.forEach((task, i) => {
     const backlogCard = createBacklogCard(task);
-    if (isAnimated) {
-      applySlideInBottomUpAnim(backlogCard, i, maxIndexForAnimation.backlogCards);
+    if (isAnimated && i <= maxIndexForAnimation.backlogCards) {
+      applySlideInBottomUpAnim(backlogCard, i);
     }
     backlogList.addItem(backlogCard);
   });
@@ -76,8 +76,8 @@ const renderUsers = (users, isAnimated) =>
   users.forEach((user, i) => {
     const userCard = new UserCard(user, usersCardSelectors);
     const newUserCard = userCard.createCard();
-    if (isAnimated) {
-      applySlideInBottomUpAnim(newUserCard, i, maxIndexForAnimation.users);
+    if (isAnimated && i <= maxIndexForAnimation.users) {
+      applySlideInBottomUpAnim(newUserCard, i);
     }
     userCard.setEventListeners();
     usersList.addItem(newUserCard);
@@ -121,6 +121,7 @@ initToggleColorTheme(toggleThemeSettings);
 ProjectState.addSubscribers([
   calendarContainer.clearItems,
   backlogList.clearItems,
+  datesContainer.clearItems,
   renderCalendar,
   renderBacklogTasks,
 ]);
