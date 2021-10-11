@@ -37,37 +37,28 @@ const datesContainer = new RendererSection(calendarDateSelectors.parentSelector)
 const calendarContainer = new Calendar(calendarColumnSelectors.parentSelector);
 calendarContainer.setEventListeners();
 
-const renderDates = (isAnimated) => {
+const renderCalendarItems = (ItemConstructor, parentContainer, selectors, isAnimated) => {
   for (let i = 0; i < ProjectState.calendarLength; i += 1) {
     const thisDate = ProjectState.startDay + fullDayInMilliseconds * i;
     const dateString = refineToNumericYYMMDD(thisDate);
 
-    const calendarDate = new CalendarDate({ date: dateString }, calendarDateSelectors);
-    const dateElement = calendarDate.createDate();
+    const thisItem = new ItemConstructor({ date: dateString }, selectors);
+    const dateElement = thisItem.createElement();
     if (isAnimated) {
       applySlideInRightLeftAnim(dateElement, i, ProjectState.calendarLength - 1);
     }
-    datesContainer.addItem(dateElement);
+    parentContainer.addItem(dateElement);
   }
 };
 
-const renderColumns = (isAnimated) => {
-  for (let i = 0; i < ProjectState.calendarLength; i += 1) {
-    const columnDate = ProjectState.startDay + fullDayInMilliseconds * i;
-    const dateString = refineToNumericYYMMDD(columnDate);
-
-    const calendarColumn = new CalendarColumn({ date: dateString }, calendarColumnSelectors);
-    const columnElement = calendarColumn.createCalendarColumn();
-    if (isAnimated) {
-      applySlideInRightLeftAnim(columnElement, i, ProjectState.calendarLength - 1);
-    }
-    calendarContainer.addItem(columnElement);
-  }
-};
+const renderDates = (isAnimated) =>
+  renderCalendarItems(CalendarDate, datesContainer, calendarDateSelectors, isAnimated);
+const renderColumns = (isAnimated) =>
+  renderCalendarItems(CalendarColumn, calendarContainer, calendarColumnSelectors, isAnimated);
 
 const createBacklogCard = (task) => {
   const backlogCard = new BacklogCard(task, backlogCardSelectors);
-  const newBacklogCard = backlogCard.createCard();
+  const newBacklogCard = backlogCard.createElement();
   backlogCard.setEventListeners();
   return newBacklogCard;
 };

@@ -24,7 +24,7 @@ class CalendarTask extends Component {
     this._endDateElement = this._taskElement.querySelector(endDateSelector);
   }
 
-  createTask() {
+  createElement() {
     this._titleELement.textContent = this._task.subject;
     this._subtitleELement.textContent = this._task.subject;
     this._descriptionElement.textContent = this._task.description;

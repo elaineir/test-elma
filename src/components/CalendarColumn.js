@@ -42,13 +42,13 @@ class CalendarColumn extends Component {
         { executor: userId, date: this._column.date, tasks: this._dayTasksSchema[userId] ?? [] },
         calendarCellSelectors
       );
-      const cellElement = columnCell.createCell();
+      const cellElement = columnCell.createElement();
       columnCell.renderItems();
       this.addItem(cellElement);
     }
   }
 
-  createCalendarColumn() {
+  createElement() {
     this.createCells();
     return this._calendarColumn;
   }

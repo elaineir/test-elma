@@ -10,7 +10,7 @@ class CalendarDate extends Component {
     this._dateElement = super._getTemplate();
   }
 
-  createDate() {
+  createElement() {
     const cellDate = new Date(this._date);
     this._dateElement.textContent = refineToNumericDDMM(cellDate);
     if (this._date === ProjectState.currentDateNumeric) {
