@@ -26,7 +26,7 @@ npm install
 Режим разработчика (live server):
 
 ```
-npm run dev
+npm run start
 ```
 
 Сборка проекта:
