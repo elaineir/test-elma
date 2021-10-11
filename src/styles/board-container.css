@@ -50,30 +50,10 @@
   }
 
   .board-container__button.button_prev {
-    left: 10px;
-  }
-
-  .board-container__button.button_next {
-    left: 40px;
-  }
-}
-
-@media screen and (max-width: 767px){
-  .board-container__button.button_prev {
-    left: 7px;
-  }
-
-  .board-container__button.button_next {
-    left: 28px;
-  }
-}
-
-@media screen and (max-width: 400px){
-  .board-container__button.button_prev {
     left: 3px;
   }
 
   .board-container__button.button_next {
-    left: 27px;
+    left: 33px;
   }
 }

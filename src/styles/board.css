@@ -68,7 +68,7 @@
 @media screen and (max-width: 1023px){
   .board {
     grid-template-columns: 60px 1fr;
-    grid-template-rows: 28px 1fr;
+    grid-template-rows: 40px 1fr;
     padding: 0 5px 5px 5px;
   }
 
@@ -79,7 +79,6 @@
 
 @media screen and (max-width: 767px){
   .board {
-    grid-template-columns: 45px 1fr;
     gap: 1px;
   }
 
@@ -89,7 +88,7 @@
 
   .board__dates {
     column-gap: 1px;
-    padding: 5px 0 3px 46px;
+    padding: 5px 0 3px 61px;
   }
 
   .board__calendar {

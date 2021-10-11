@@ -22,9 +22,8 @@
   }
 }
 
-@media screen and (max-width: 1023px){
+@media screen and (max-width: 767px){
   .calendar-date {
-    font-size: 10px;
-    padding: 5px;
+    padding: 10px 3px;
   }
 }
