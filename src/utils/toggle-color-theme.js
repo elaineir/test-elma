@@ -1,18 +1,26 @@
-const initToggleColorTheme = ({
-  bodySelector,
-  bodyNewThemeClass,
-  buttonSelector,
-  buttonNewThemeClass,
-}) => {
+import { localStorageThemeKey } from '../config/constants';
+
+const initToggleColorTheme = ({ bodySelector, bodyNewThemeClass, buttonSelector }) => {
   const body = document.querySelector(bodySelector);
   const changeColorThemeButton = document.querySelector(buttonSelector);
 
-  function toggleTheme() {
-    body.classList.toggle(bodyNewThemeClass);
-    changeColorThemeButton.classList.toggle(buttonNewThemeClass);
+  const isThemeDark = JSON.parse(localStorage.getItem(localStorageThemeKey));
+
+  if (isThemeDark) {
+    body.classList.add(bodyNewThemeClass);
   }
 
-  changeColorThemeButton.addEventListener('click', toggleTheme);
+  const toggleAndMemoTheme = () => {
+    if (body.classList.contains(bodyNewThemeClass)) {
+      body.classList.remove(bodyNewThemeClass);
+      localStorage.setItem(localStorageThemeKey, JSON.stringify(false));
+    } else {
+      body.classList.add(bodyNewThemeClass);
+      localStorage.setItem(localStorageThemeKey, JSON.stringify(true));
+    }
+  };
+
+  changeColorThemeButton.addEventListener('click', toggleAndMemoTheme);
 };
 
 export default initToggleColorTheme;

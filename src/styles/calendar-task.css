@@ -7,6 +7,7 @@
   padding: 5px;
   background-color: var(--colorUICardBoard);
   border-radius: 5px;
+  transition: filter var(--transitionBase);
 }
 
 .calendar-task__title {
@@ -36,12 +37,12 @@
   visibility: hidden;
   pointer-events: none;
   transition: var(--transitionBase);
+  z-index: 2;
 }
 
 .calendar-task:hover .calendar-task__popup {
   visibility: visible;
   pointer-events: all;
-  z-index: 1;
   animation: slide-in-right-left .3s ease-out .2s forwards;
 }
 
@@ -50,7 +51,7 @@
   font-size: 18px;
   font-weight: 500;
   line-height: 1.2;
-  color: var(--colorTextSecondary);
+  color: var(--colorTextPrimary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

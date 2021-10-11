@@ -1,6 +1,7 @@
 .page {
   position: relative;
   max-width: var(--maxContentWidth);
+  margin: 0 auto;
   transition: opacity var(--transitionBase);
 }
 

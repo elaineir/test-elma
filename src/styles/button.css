@@ -53,7 +53,7 @@
   transition: transform .3s ease;
 }
 
-.button_theme_dark .button__svg-theme {
+.body_theme_dark .button__svg-theme {
   transform: rotate(45deg);
 }
 

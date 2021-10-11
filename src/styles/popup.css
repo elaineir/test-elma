@@ -6,6 +6,7 @@
   transform: translateX(-50%) translateY(-200px);
   padding: 10px;
   border-radius: 10px;
+  z-index: 10;
   transition: var(--transitionBase);
 }
 

@@ -38,7 +38,8 @@ const renderColumns = () => {
     const dateString = refineToNumericYYMMDD(columnDate);
 
     const calendarColumn = new CalendarColumn({ date: dateString }, calendarColumnSelectors);
-    calendarContainer.addItem(calendarColumn.createCalendarColumn());
+    const columnElement = calendarColumn.createCalendarColumn();
+    calendarContainer.addItem(columnElement);
   }
 };
 
@@ -82,11 +83,11 @@ const getInitialData = async () => {
     renderUsers(users);
     renderBacklogTasks();
     renderColumns();
-    page.classList.remove(preloaderStateSelectors.pageHiddenClass);
-    preloader.classList.remove(preloaderStateSelectors.preloaderVisibleClass);
   } catch (err) {
     popupError.open();
   }
+  page.classList.remove(preloaderStateSelectors.pageHiddenClass);
+  preloader.classList.remove(preloaderStateSelectors.preloaderVisibleClass);
 };
 
 getInitialData();

@@ -88,3 +88,4 @@ export const dateSettings = {
 
 export const fullDayInMilliseconds = 3600 * 24 * 1000;
 export const timerDelay = 3000;
+export const localStorageThemeKey = 'isThemeDark';
