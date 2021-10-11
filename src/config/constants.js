@@ -24,12 +24,17 @@ export const usersCardSelectors = {
   dragOverClass: 'card-user_drag-over',
 };
 
+export const calendarDateSelectors = {
+  parentSelector: '.board__dates',
+  templateSelector: '.template-calendar-date',
+  elementSelector: '.calendar-date',
+  currentDayClass: 'calendar-date_current',
+};
+
 export const calendarColumnSelectors = {
   parentSelector: '.board__calendar',
   templateSelector: '.template-calendar-column',
   elementSelector: '.calendar-column',
-  dateCellSelector: '.calendar-column__date',
-  currentDayClass: 'calendar-column_current-day',
 };
 
 export const calendarCellSelectors = {

@@ -1,17 +1,26 @@
 import ProjectState from '../state/ProjectState';
 import { fullDayInMilliseconds, weekButtonsSelectors } from '../config/constants';
 
-const initSwitchBetweenWeeks = (clearContainerCallback, renderCallback) => {
+const initSwitchBetweenWeeks = (
+  clearContainerCallback,
+  clearDatesCallback,
+  renderDates,
+  renderCellsCallback
+) => {
   const showNextWeek = () => {
     clearContainerCallback();
+    clearDatesCallback();
     ProjectState.startDay += fullDayInMilliseconds * 7;
-    renderCallback();
+    renderDates();
+    renderCellsCallback();
   };
 
   const showPrevWeek = () => {
     clearContainerCallback();
+    clearDatesCallback();
     ProjectState.startDay -= fullDayInMilliseconds * 7;
-    renderCallback();
+    renderDates();
+    renderCellsCallback();
   };
 
   const nextWeekButton = document.querySelector(weekButtonsSelectors.nextWeekButton);

@@ -1,0 +1,30 @@
+.calendar-date {
+  display: inline-block;
+  width: calc(100% / 7);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1;
+  text-align: center;
+  color: var(--colorTextPrimary);
+  padding: 10px;
+  background-color: var(--colorUICalendar);
+  border-radius: 5px;
+}
+
+.calendar-date_current {
+  color: var(--colorTextTertiary);
+  background-color: var(--colorUISecondary);
+}
+
+@media screen and (max-width: 1280px){
+  .calendar-date {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 1023px){
+  .calendar-date {
+    font-size: 10px;
+    padding: 5px;
+  }
+}

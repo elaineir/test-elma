@@ -22,6 +22,7 @@
   .board-container__button {
     position: absolute;
     top: 10px;
+    z-index: 7;
   }
 
   .board-container__button.button_prev {
@@ -68,15 +69,11 @@
 }
 
 @media screen and (max-width: 400px){
-  .board-container__button {
-    top: 2px;
-  }
-
   .board-container__button.button_prev {
-    left: 5px;
+    left: 3px;
   }
 
   .board-container__button.button_next {
-    left: 26px;
+    left: 27px;
   }
 }
