@@ -62,11 +62,13 @@ const renderBacklogTasks = () => {
   });
 };
 
-const renderUsers = (users) =>
+const renderUsers = (users, isAnimated) =>
   users.forEach((user, i) => {
     const userCard = new UserCard(user, usersCardSelectors);
     const newUserCard = userCard.createCard();
-    applySlideInBottomUpAnim(newUserCard, i);
+    if (isAnimated) {
+      applySlideInBottomUpAnim(newUserCard, i);
+    }
     userCard.setEventListeners();
     usersList.addItem(newUserCard);
   });
@@ -86,9 +88,9 @@ const getInitialData = async () => {
     ProjectState.users = users;
     ProjectState.mapUsersIds(users);
     // рендеринг
-    renderUsers(users);
-    renderBacklogTasks();
+    renderUsers(users, true);
     renderColumns(true);
+    renderBacklogTasks();
   } catch (err) {
     popupError.open();
   }
@@ -106,7 +108,9 @@ initSwitchBetweenWeeks(calendarContainer.clearItems, renderColumns);
 initToggleColorTheme(toggleThemeSettings);
 
 // добавление наблюдателей в стейт для ререндера
-ProjectState.addSubscriber(calendarContainer.clearItems);
-ProjectState.addSubscriber(backlogList.clearItems);
-ProjectState.addSubscriber(renderColumns);
-ProjectState.addSubscriber(renderBacklogTasks);
+ProjectState.addSubscribers([
+  calendarContainer.clearItems,
+  backlogList.clearItems,
+  renderColumns,
+  renderBacklogTasks,
+]);

@@ -105,8 +105,8 @@ class ProjectState {
     this._usersIds = { ...ids };
   }
 
-  addSubscriber(listenerFn) {
-    this._subscribers.push(listenerFn);
+  addSubscribers(subscribers) {
+    this._subscribers = [...subscribers];
   }
 }
 
