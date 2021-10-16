@@ -36,7 +36,7 @@ class BacklogCard extends Component {
     this._backlogCard.classList.remove(this._dragStartClass);
   }
 
-  createCard() {
+  createElement() {
     this._cardTitle.textContent = this._cardData.subject;
     this._cardDescription.textContent = this._cardData.description;
     this._cardStartDate.textContent = refineToString(this._cardData.planStartDate);

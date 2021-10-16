@@ -13,7 +13,7 @@ class CalendarCell extends Component {
     this._cellElement.append(item);
   }
 
-  createCell() {
+  createElement() {
     this._cellElement.setAttribute('data-executor', this._cell.executor);
     this._cellElement.setAttribute('data-date', this._cell.date);
 
@@ -23,7 +23,7 @@ class CalendarCell extends Component {
   renderItems() {
     this._cell.tasks.forEach((task) => {
       const newTask = new CalendarTask(task, calendarTaskSelectors);
-      this._addItem(newTask.createTask());
+      this._addItem(newTask.createElement());
     });
   }
 }

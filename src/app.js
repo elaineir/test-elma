@@ -3,7 +3,9 @@ import ProjectState from './state/ProjectState';
 import {
   backlogCardSelectors,
   calendarColumnSelectors,
+  calendarDateSelectors,
   fullDayInMilliseconds,
+  maxIndexForAnimation,
   popupSelectors,
   preloaderStateSelectors,
   toggleThemeSettings,
@@ -17,6 +19,7 @@ import {
   BacklogCard,
   Calendar,
   CalendarColumn,
+  CalendarDate,
   PopupError,
   RendererSection,
   UserCard,
@@ -30,34 +33,41 @@ const popupError = new PopupError(popupSelectors);
 // контейнеры-рендереры
 const backlogList = new RendererSection(backlogCardSelectors.parentSelector);
 const usersList = new RendererSection(usersCardSelectors.parentSelector);
+const datesContainer = new RendererSection(calendarDateSelectors.parentSelector);
 const calendarContainer = new Calendar(calendarColumnSelectors.parentSelector);
 calendarContainer.setEventListeners();
 
-const renderColumns = (isAnimated) => {
+const renderCalendar = (isAnimated) => {
   for (let i = 0; i < ProjectState.calendarLength; i += 1) {
-    const columnDate = ProjectState.startDay + fullDayInMilliseconds * i;
-    const dateString = refineToNumericYYMMDD(columnDate);
+    const thisDate = ProjectState.startDay + fullDayInMilliseconds * i;
+    const dateString = refineToNumericYYMMDD(thisDate);
 
-    const calendarColumn = new CalendarColumn({ date: dateString }, calendarColumnSelectors);
-    const columnElement = calendarColumn.createCalendarColumn();
+    const dateObject = new CalendarDate({ date: dateString }, calendarDateSelectors);
+    const columnObject = new CalendarColumn({ date: dateString }, calendarColumnSelectors);
+    const dateElement = dateObject.createElement();
+    const columnElement = columnObject.createElement();
     if (isAnimated) {
+      applySlideInRightLeftAnim(dateElement, i);
       applySlideInRightLeftAnim(columnElement, i);
     }
+    datesContainer.addItem(dateElement);
     calendarContainer.addItem(columnElement);
   }
 };
 
 const createBacklogCard = (task) => {
   const backlogCard = new BacklogCard(task, backlogCardSelectors);
-  const newBacklogCard = backlogCard.createCard();
+  const newBacklogCard = backlogCard.createElement();
   backlogCard.setEventListeners();
   return newBacklogCard;
 };
 
-const renderBacklogTasks = () => {
+const renderBacklogTasks = (isAnimated) => {
   ProjectState.backlogTasks.forEach((task, i) => {
     const backlogCard = createBacklogCard(task);
-    applySlideInBottomUpAnim(backlogCard, i);
+    if (isAnimated && i <= maxIndexForAnimation.backlogCards) {
+      applySlideInBottomUpAnim(backlogCard, i);
+    }
     backlogList.addItem(backlogCard);
   });
 };
@@ -66,7 +76,7 @@ const renderUsers = (users, isAnimated) =>
   users.forEach((user, i) => {
     const userCard = new UserCard(user, usersCardSelectors);
     const newUserCard = userCard.createCard();
-    if (isAnimated) {
+    if (isAnimated && i <= maxIndexForAnimation.users) {
       applySlideInBottomUpAnim(newUserCard, i);
     }
     userCard.setEventListeners();
@@ -89,8 +99,8 @@ const getInitialData = async () => {
     ProjectState.mapUsersIds(users);
     // рендеринг
     renderUsers(users, true);
-    renderColumns(true);
-    renderBacklogTasks();
+    renderCalendar(true);
+    renderBacklogTasks(true);
   } catch (err) {
     popupError.open();
   }
@@ -103,7 +113,7 @@ getInitialData();
 // поиск
 initSearch(backlogList, createBacklogCard, renderBacklogTasks);
 // перелистывание календаря
-initSwitchBetweenWeeks(calendarContainer.clearItems, renderColumns);
+initSwitchBetweenWeeks(calendarContainer.clearItems, datesContainer.clearItems, renderCalendar);
 // переключение темы
 initToggleColorTheme(toggleThemeSettings);
 
@@ -111,6 +121,7 @@ initToggleColorTheme(toggleThemeSettings);
 ProjectState.addSubscribers([
   calendarContainer.clearItems,
   backlogList.clearItems,
-  renderColumns,
+  datesContainer.clearItems,
+  renderCalendar,
   renderBacklogTasks,
 ]);

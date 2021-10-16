@@ -44,8 +44,11 @@
             <div class="board__users">
               <!-- сюда будут рендериться карточки users -->
             </div>
+            <div class="board__dates">
+              <!-- сюда будут рендериться даты -->
+            </div>
             <div class="board__calendar">
-              <!-- сюда будет рендериться календарь с тасками -->
+              <!-- сюда будут рендериться ячейки с тасками -->
             </div>
           </section>
 
@@ -91,10 +94,15 @@
     </article>
   </template>
 
+  <template class="template-calendar-date">
+    <span class="calendar-date">
+      <!-- сюда будут рендериться даты -->
+    </span>
+  </template>
+
   <!-- колонка календаря -->
   <template class="template-calendar-column">
     <div class="calendar-column">
-      <div class="calendar-column__date">Дата</div>
       <!-- сюда будут рендериться ячейки -->
     </div>
   </template>

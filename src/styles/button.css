@@ -42,7 +42,7 @@
   opacity: .6;
   pointer-events: none;
 }
- 
+
 .button_theme {
   fill: var(--colorTextPrimary);
   background-color: transparent;
@@ -92,21 +92,5 @@
     width: 25px;
     height: 25px;
     background-size: 12px;
-  }
-}
-
-@media screen and (max-width: 1023px){
-  .button_prev, .button_next {
-    width: 20px;
-    height: 20px;
-    background-size: 5px;
-  }
-
-  .button_prev {
-    background-position: 7px center;
-  }
-
-  .button_next {
-    background-position: 9px center;
   }
 }
