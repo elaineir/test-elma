@@ -84,28 +84,27 @@ const renderUsers = (users, isAnimated) =>
   });
 
 // первая отрисовка и обработка данных с сервера
-const getInitialData = async () => {
-  try {
-    const users = await getData(USERS_ROUTE);
-    const tasks = await getData(TASKS_ROUTE);
-
-    // сортировка заданий и добавление их в стейт
-    tasks.forEach((task) => {
-      if (task.executor) ProjectState.addTaskToAssignedTasks(task);
-      else ProjectState.addTaskToBacklog(task);
+const getInitialData = () => {
+  Promise.all([getData(USERS_ROUTE), getData(TASKS_ROUTE)])
+    .then(([users, tasks]) => {
+      // сортировка заданий и добавление их в стейт
+      tasks.forEach((task) => {
+        if (task.executor) ProjectState.addTaskToAssignedTasks(task);
+        else ProjectState.addTaskToBacklog(task);
+      });
+      // формирование объекта с id исполнителей
+      ProjectState.users = users;
+      ProjectState.mapUsersIds(users);
+      // рендеринг
+      renderUsers(users, true);
+      renderCalendar(true);
+      renderBacklogTasks(true);
+    })
+    .catch(() => popupError.open())
+    .finally(() => {
+      page.classList.remove(preloaderStateSelectors.pageHiddenClass);
+      preloader.classList.remove(preloaderStateSelectors.preloaderVisibleClass);
     });
-    // формирование объекта с id исполнителей
-    ProjectState.users = users;
-    ProjectState.mapUsersIds(users);
-    // рендеринг
-    renderUsers(users, true);
-    renderCalendar(true);
-    renderBacklogTasks(true);
-  } catch (err) {
-    popupError.open();
-  }
-  page.classList.remove(preloaderStateSelectors.pageHiddenClass);
-  preloader.classList.remove(preloaderStateSelectors.preloaderVisibleClass);
 };
 
 getInitialData();
